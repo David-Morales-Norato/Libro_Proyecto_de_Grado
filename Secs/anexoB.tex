@@ -1,0 +1,90 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+%                                Anexo B
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+\newpage
+\anexo{Función \emph{ode45} de MATLAB}\label{anexoB}
+% ------------------------------------------------------------------------
+La función $ode45$ está basada en un algoritmo de tipo Runge-Kutta, que se desarrolló a partir del método de Euler mejorado \myfootcite{chapra2003metodos}. La función recibe tres parámetros esenciales: $f(t)$ dentro de un $script$ en el que se define la ecuación diferencial acompañado por un simbolo $@$, el vector de límites de tiempo $\left[ t_0 \quad t_f \right]$ y el vector de condiciones iniciales $y_0$. En otras palabras el prototipo básico para usar \emph{ode45} es el siguiente:
+% ------------------------------------------------------------------------
+\begin{equation}\label{defode}
+   [t,y]=\emph{ode45}(@f(t),\left[ t_0 \quad t_f \right],y_0);
+    \end{equation}
+% ------------------------------------------------------------------------
+En este caso la solución numérica se almacenará en el vector $y$  para cada uno de los instantes de tiempo presentes en el vector $t$.\\
+
+La función $ode45$, resuelve ecuaciones del tipo $\dot{y} = f(t,y)$, por tanto si se desea resolver ecuaciones de orden superior estas deben escribirse como un sistema de ecuaciones diferenciales de primer orden.\\
+
+A manera de ejemplo, se ilustrará la forma de resolver la ecuación diferencial de segundo orden
+% ------------------------------------------------------------------------
+\begin{equation}\label{segundo}
+   \ddot{x}-\mu\left(1-x^2\right)\dot{x}+x=0,
+\end{equation}
+% ------------------------------------------------------------------------
+donde $\mu > 0$ es un parámetro escalar.\\
+
+\noindent Por tanto, definiendo
+% ------------------------------------------------------------------------
+
+$$y_1 = x; \quad y_2 = \dot{x}$$
+% ------------------------------------------------------------------------
+
+\noindent la expresión \eqref{segundo} puede ser reescrita como
+% ------------------------------------------------------------------------
+
+$$
+\dot{y}_2 = \mu \left( 1 - y_1^2 \right) y_2 + y_1
+$$
+% ------------------------------------------------------------------------
+
+\noindent es decir, transformando la ecuación diferencial original de segundo orden y una variable, en una ecuación diferencial equivalente de primer orden y dos variables. Así entonces, es posible construir el vector
+% ------------------------------------------------------------------------
+
+$$
+y = \left[ {\begin{array}{*{20}c}
+   y_1  \\
+   y_2  \\
+\end{array}} \right]
+$$
+% ------------------------------------------------------------------------
+
+\noindent cuya dinámica viene representada por
+% ------------------------------------------------------------------------
+
+$$
+\dot{y} = \left[ {\begin{array}{*{20}c}
+   f_1 \left(t, y \right)  \\
+   f_2 \left(t, y \right) \\
+\end{array}} \right]
+$$
+% ------------------------------------------------------------------------
+
+\noindent siendo
+% ------------------------------------------------------------------------
+
+$$f_1\left(t, y \right) = y_2; \quad f_2\left(t, y \right) =  \mu \left( 1 - y_1^2 \right) y_2 + y_1$$
+% ------------------------------------------------------------------------
+
+De esta manera, evaluar la expresión \eqref{defode} permite obtener una matriz de salida $y$ con filas representando los vectores solución para $y_1$ e $y_2$ como función de $t$.\\
+% ------------------------------------------------------------------------
+
+\begin{figure}[h]
+\centering
+\caption[]{Diagrama de flujo para algoritmo de integración numérica de la función $ode45$ de MATLAB}\label{flujodiag}
+\includegraphics[width=0.55\textwidth]{Figs/flujodiag}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+% ------------------------------------------------------------------------
+
+En la Fig. \ref {flujodiag} se ilustra el diagrama de flujo del algoritmo empleado para hallar la solución de una ecuación diferencial mediante integración numérica empleando la función $ode45$ de MATLAB.\\
+
+\noindent Inicialmente, se deben asignar los parámetros definidos en la ecuación \eqref{defode}.\\
+
+\noindent Posteriormente, un bucle interno hace llamado iterativo a la función $f(t)$ evaluada para valores de tiempo entre $t_0$ y $t_f$ a partir de las condiciones iniciales $y_0$. Para cada ciclo la condición inicial se recalcula siendo la condición final del ciclo anterior. El tiempo se incrementa en un tamaño de paso $\delta t$ de forma adaptativa, si no se especifica lo contrario. Tras alcanzarse el tiempo final $t_f$, el bucle interno termina y entrega como resultado el vector de puntos de la trayectoria solución $y(t)$ al igual que el vector de tiempos $t$. 

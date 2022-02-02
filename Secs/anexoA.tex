@@ -1,0 +1,226 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+%                                Anexo A
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+\nnchapter{ANEXOS}
+% ------------------------------------------------------------------------
+\anexo{Fundamentos de sólidos rígidos}\label{anexoA}
+% ------------------------------------------------------------------------
+Un sólido rígido, es un cuerpo formado por varias partículas puntuales que
+guardan distancias constantes entre sí \myfootcite{sears2005fisica}.\\
+
+Una operación fundamental para definir cantidades en el espacio de movimiento de
+un sólido rígido es el producto vectorial (también denominado producto cruz \myfootcite{stanley1993algebra}),
+el cual produce un vector perpendicular (normal) al plano formado por otros dos vectores
+que se multiplican.\\
+
+Sean dos vectores $\vec{a}$ y $\vec{b}$ definidos en $\mathbb{R}^3$. El producto vectorial entre $\vec{a}$ y $\vec{b}$ (denotado $\vec{a} \times \vec{b}$) es otro vector (digamos $\vec{c} \in \mathbb{R}^3$) cuyo cálculo puede ser efectuado a través de determinantes como sigue:
+% ------------------------------------------------------------------------
+\begin{equation}\label{defprodvect}
+\vec{c} = \vec{a} \times \vec{b} = \begin{vmatrix}
+i& j & k \\
+a_i & a_j  & a_k \\
+b_i & b_j  & b_k
+\end{vmatrix} =
+\begin{vmatrix}
+ a_j & a_k \\
+ b_j & b_k
+\end{vmatrix}i~
+-
+\begin{vmatrix}
+a_i & a_k \\
+b_i & b_k
+\end{vmatrix}j~
++\begin{vmatrix}
+ a_i & a_j \\
+ b_i & b_j
+\end{vmatrix}k
+\end{equation}
+% ------------------------------------------------------------------------
+De esta manera, siendo $\vec{a}=(1,-1,2)$ y $\vec{b}=(3,-4,5)$ se obtiene:
+% ------------------------------------------------------------------------
+\begin{equation}
+\vec{a} \times \vec{b} =\begin{vmatrix}
+i& j & k \\
+1 &-1  &2 \\
+3 &-4  &5
+\end{vmatrix}=
+\begin{vmatrix}
+ -1&2 \\
+ -4&5
+\end{vmatrix}i~
+-
+\begin{vmatrix}
+1 &2 \\
+3 &5
+\end{vmatrix}j~
++\begin{vmatrix}
+ 1&-1 \\
+ 3&4
+\end{vmatrix}k
+= 3i-j-k
+\end{equation}
+% ------------------------------------------------------------------------
+\noindent La Fig. \ref{prodvect} ilustra esta operación gráficamente en el espacio tridimensional.
+% ------------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\caption[]{Ilustración gráfica para producto vectorial}\label{prodvect}
+\includegraphics[width=0.3\textwidth]{Figs/prodvect}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+% ------------------------------------------------------------------------
+
+\section*{Condición de rigidez}
+% ------------------------------------------------------------------------
+Considere el sólido rígido presentado en la Fig. \ref{rigid}. Para cada pareja de puntos $(P_i, P_j)$ pertenecientes al sólido, se cumple:
+% ------------------------------------------------------------------------
+\begin{equation}\label{rigidez}
+\frac{d}{dt}[\left|r_i - r_j\right|] = \frac{d}{dt}[\left|r_{ij}\right|] = 0,
+\end{equation}
+% ------------------------------------------------------------------------
+lo cual significa que la distancia entre puntos de un sólido rígido se mantiene invariante. Esto último se conoce como la \emph{condición de rígidez}.\\
+% ------------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\caption[]{Sólido rígido}\label{rigid}
+\includegraphics[width=0.3\textwidth]{Figs/rigid}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+% ------------------------------------------------------------------------
+
+\noindent Asimismo, a partir de \eqref{rigidez} se obtiene:
+% ------------------------------------------------------------------------
+\begin{equation}
+\frac{d}{dt}[\left|r_i - r_j\right|] = \left|\dot{r}_i - \dot{r}_j\right| = 0,
+\end{equation}
+% ------------------------------------------------------------------------
+y por tanto, sabiendo que $\vec{\dot{r}}$ es el vector velocidad $\vec{v}$ para un punto del sólido visto desde el observador, es posible escribir:
+% ------------------------------------------------------------------------
+\begin{equation}
+\left|v_i\right| = \left|v_j\right|,
+\end{equation}
+% ------------------------------------------------------------------------
+con lo cual la velocidad de traslación para cualquier punto del sólido será la misma, y así, una vez definido el movimiento de un punto cualquiera del cuerpo rigido que se traslada en el espacio, es posible definir la totalidad de su movimiento.
+
+% ------------------------------------------------------------------------
+\section*{Movimiento de rotación}
+% ------------------------------------------------------------------------
+En la Fig. \ref{rotacion} se ilustra un punto que rota alrededor de un eje fijo, localizado en el cuerpo del sólido.\\
+% ------------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\caption[]{Rotación de un punto del sólido alrededor de un eje fijo}\label{rotacion}
+\includegraphics[width=0.3\textwidth]{Figs/rotacion}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+% ------------------------------------------------------------------------
+
+\noindent A partir de ello, es posible definir la velocidad angular que experimenta el punto $P$ alrededor del eje de rotación, en el modo siguiente:
+% ------------------------------------------------------------------------
+\begin{equation}
+\omega = \frac{d}{dt}\theta
+\end{equation}\
+% ------------------------------------------------------------------------
+
+\noindent Tambien, puede escribirse del diagrama la velocidad tangencial $v$ del punto mediante:
+% ------------------------------------------------------------------------
+\begin{equation}
+\vec{v} = \vec{r} \times \vec{\omega},
+\end{equation}
+% ------------------------------------------------------------------------
+siendo $\vec{r}$ el vector que marca la distancia del punto $P$ al eje de rotación $O$.\\
+
+\noindent Por tanto, el vector de aceleración puede ser formulado como:
+% ------------------------------------------------------------------------
+\begin{eqnarray}\label{aceler}
+\nonumber \frac{d}{dt}\vec{v} & = & \frac{d}{dt}[\vec{r} \times \vec{\omega}]\\
+\nonumber & = & \left( \frac{d}{dt}\vec{r}\times \vec{\omega}\right) + \left( \vec{r}\times \frac{d}{dt}\vec{\omega}\right)\\
+\vec{a}   & = & \vec{r} \times \vec{\alpha},
+\end{eqnarray}
+% ------------------------------------------------------------------------
+con $\vec{a}$ y $\vec{\alpha}$ representando, respectivamente, los vectores de aceleración lineal y angular. Note que se asume $\frac{d}{dt}\vec{r} = 0$ debido a que el eje de rotación es fijo.
+
+% ------------------------------------------------------------------------
+\section*{Conservación del momento angular}
+% ------------------------------------------------------------------------
+\noindent En un movimiento traslacional, el principio de conservación del momento lineal establece:
+% ------------------------------------------------------------------------
+\begin{equation}
+\frac{d}{dt}\vec{p} = \frac{d}{dt}{m\vec{v}} = 0,
+\end{equation}
+% ------------------------------------------------------------------------
+a partir de lo cual el momento $\vec{p}$ será constante en ausencia de fuerzas externas.\\
+
+De manera similar, es posible definir el momento angular $\vec{\mathbf{L}}$ de una partícula de masa puntual que rota alrededor de un eje fijo, en el modo siguiente:
+% ------------------------------------------------------------------------
+\begin{equation}\label{momang}
+\vec{\mathbf{L}} = \vec{r} \times \vec{p},
+\end{equation}
+% ------------------------------------------------------------------------
+siendo $\vec{r}$ el vector de distancia a la masa desde el centro de rotación.\\
+
+\noindent Por tanto, el principio de conservación del momento angular puede establecerse como sigue:
+% ------------------------------------------------------------------------
+\begin{eqnarray*}
+\frac{d}{dt}\vec{\mathbf{L}} & = & \frac{d}{dt}{[\vec{r} \times \vec{p}]} \\
+                             & = & \frac{d}{dt}{[\vec{r} \times m\vec{v}]}\\
+                             & = & m \frac{d}{dt}{[\vec{r} \times \vec{v}]}\\
+                             & = & m\left([\vec{r}\times\frac{d}{dt}\vec{v}]+[\frac{d}{dt}\vec{r}\times\vec{v}]\right)\\
+                             & = & m\left([\vec{r}\times \vec{a}]+[\vec{v}\times\vec{v}]\right)\\
+                             & = & \vec{r}\times m\vec{a}\\
+                             & = & \vec{r}\times \vec{F}\\
+                             & = & \tau,
+\end{eqnarray*}
+% ------------------------------------------------------------------------
+siendo $\tau$ el torque neto aplicado.\\
+
+\noindent Empleando \eqref{aceler} puede relacionarse este torque con la aceleración angular $\vec{\alpha}$, a partir de:
+% ------------------------------------------------------------------------
+\begin{eqnarray*}
+\tau & = & \vec{r}\times m\vec{a}\\
+     & = & \vec{r}\times m\left(\vec{r} \times \vec{\alpha}\right)\\
+     & = & m\left(\vec{r}\times \left(\vec{r} \times \vec{\alpha}\right)\right)
+\end{eqnarray*}
+% ------------------------------------------------------------------------
+donde, si $\vec{r}$ es perpendicular a $\vec{\alpha}$, entonces el producto vectorial se reduce al producto de las magnitudes:
+% ------------------------------------------------------------------------
+\begin{eqnarray}\label{newrot}
+\nonumber \tau & = & m r^2 \alpha \\
+               & = & I \alpha,
+\end{eqnarray}
+% ------------------------------------------------------------------------
+siendo $I$ el momento de inercia de las partes rotativas del cuerpo rígido.\\
+
+\noindent La expresión \eqref{newrot} es la segunda ley de Newton de rotación, y podrá ser definida siempre que sea válido un $I$ constante. Dicha situación no siempre es posible, principalmente si se asume que el eje de rotación puede variar en el tiempo. En tal caso, $\vec{r}$ en la Fig. \ref{rotacion} no es constante y por tanto no es válida la solución propuesta para $\vec{a}$ en \eqref{aceler}, resultando en la siguiente definición alternativa para $\tau$:
+% ------------------------------------------------------------------------
+\begin{eqnarray*}
+\tau & = & \vec{r}\times m\vec{a}\\
+     & = & \vec{r}\times m\left(\left( \frac{d}{dt}\vec{r}\times \vec{\omega}\right) + \left( \vec{r}\times \frac{d}{dt}\vec{\omega}\right)\right)\\
+     & = & m\left(\left[\vec{r}\times\left( \frac{d}{dt}\vec{r}\times \vec{\omega}\right)\right] + \left[\vec{r}\times\left( \vec{r}\times \vec{\alpha}\right)\right]\right)\\
+     & = & m\left(\left[\vec{r}\times\left( \frac{d}{dt}\vec{r}\times \vec{\omega}\right)\right]\right) + I\alpha.
+\end{eqnarray*}\
+% ------------------------------------------------------------------------
+
+\noindent El término
+% ------------------------------------------------------------------------
+$$
+m\left(\left[\vec{r}\times\left( \frac{d}{dt}\vec{r}\times \vec{\omega}\right)\right]\right),
+$$\
+% ------------------------------------------------------------------------
+
+\noindent representa los efectos (torques) debidos a las variaciones del eje de rotación, que evidentemente también representan variaciones del vector de momento angular $\vec{\mathbf{L}}$. Dichos efectos se denominan \emph{fuerzas inerciales}, puesto que tienen sentido en un marco de referencia de un cuerpo en rotación. Los tipos más representativos de fuerza inercial son los efectos giroscópicos y la fuerza de Coriollis \myfootcite{sears2005fisica}.
+% ------------------------------------------------------------------------ 

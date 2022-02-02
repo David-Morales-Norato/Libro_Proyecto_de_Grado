@@ -1,0 +1,154 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+%                                Anexo C
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+\newpage
+\anexo{Interfaz de animación de la dinámica del sistema}\label{anexoC}
+% ------------------------------------------------------------------------
+En ausencia de un prototipo real para verificar el comportamiento dinámico del sistema controlado, se optó por construir una animación que permitiera recrear el movimiento del \emph{dron} de una manera cercana al comportamiento físico real. A continuación se presentan las etapas importantes para este desarrollo.
+
+% ------------------------------------------------------------------------
+\section*{Descripción general de requerimientos}
+% ------------------------------------------------------------------------
+Se requiere construir una interfaz de software que permita visualizar el comportamiento del dron en el espacio de movimiento, como aproximación a la operación real del sistema para diferentes condiciones de simulación (lazo abierto, lazo cerrado controlado PID y por realimentación de estados) ante la presencia de perturbaciones. La interfaz deberá permitir modificar parámetros del sistema y los parámetros de simulación, así como también entregar información de las trayectorias de variables con respecto al tiempo.
+
+% ------------------------------------------------------------------------
+\subsection*{Nivel superior de detalle}
+% ------------------------------------------------------------------------
+Posterior a tener una descripción, en palabras, acerca de los requerimientos del sistema (interfaz) a desarrollar, el paso siguiente es crear un diagrama general de entradas y salidas a manera de nivel superior de detalle. Dicho diagrama se presenta en la Fig. \ref{1211}.
+% ------------------------------------------------------------------------
+\begin{figure}[h]
+\centering
+\caption[]{Representación de nivel superior de detalle para desarrollo de interfaz}\label{1211}
+\includegraphics[width=0.7\textwidth]{figs/primero}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+\subsection*{Partición de primer nivel}
+% ------------------------------------------------------------------------
+Una primera partición se logra incorporando el bloque que realiza la solución numérica de las ecuaciones del sistema, a partir de los parámetros de entrada en el modelo y los valores que configuran la simulación, según se muestra en la Fig. \ref{1212}.\\
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Representación de primer nivel de partición para subproceso de simulación}\label{1212}
+\includegraphics[width=0.7\textwidth]{figs/segunda}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+Asimismo, los resultados de este simulador serán la entrada de un nuevo bloque encargado de construir una animación para emular el comportamiento del \emph{dron} en el espacio de movimiento. Una ilustración para este segundo bloque se presenta en la Fig. \ref{1213} donde se observa también que será necesario configurar algunas opciones de simulación incorporadas como señal de entrada.\\
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Representación de primer nivel de partición para subproceso de animación}\label{1213}
+\includegraphics[width=0.7\textwidth]{figs/tercero}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+% ------------------------------------------------------------------------
+
+\noindent Finalmente, este primer nivel de partición se completa uniendo los dos subprocesos tal y como se ilustra en la Fig. \ref{1214}.
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Representación de primer nivel de partición para desarrollo de interfaz}\label{1214}
+\includegraphics[width=0.7\textwidth]{figs/cuarta}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+\subsubsection*{Partición de segundo nivel}
+% ------------------------------------------------------------------------
+A su vez, es posible abrir el bloque correspondiente a la simulación de las ecuaciones del sistema (según se observa en la Fig. \ref{16}) para permitir incorporar la selección del escenario de control que define una configuración importante como lo es la forzante de entrada $\Delta\boldsymbol\tau(t)$ en el modelo. De manera similar, el bloque que realiza la solución en el tiempo para las ecuaciones del sistema es un integrador numérico.\\
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Representación de segundo nivel de partición para subproceso de simulación}\label{16}
+\includegraphics[width=0.7\textwidth]{figs/quinto}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+\noindent Por tanto, en la Fig. \ref{1515} se muestra el diagrama de bloques resultante para este segundo y definitivo nivel de detalle.
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Diagrama de interconexión de susbsistemas que conforman la interfaz de animación de la planta}\label{1515}
+\includegraphics[width=0.9\textwidth]{figs/sexto}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+\subsection*{Selección de herramienta para implementación}
+% ------------------------------------------------------------------------
+A partir del diagrama obtenido en la Fig. \ref{1515}, es claro que el corazón de la interfaz a ser diseñada es el integrador numérico que resuelve las ecuaciones del sistema. Como ya ilustrado en el Anexo \ref{anexoB}, este integrador numérico ha sido codificado empleando la función $ode45$ de MATLAB. Por tanto, con el objetivo de facilitar la utilización de los desarrollos numéricos a disposición, se presenta a MATLAB como la primera opción para desarrollar la herramienta de software requerida.\\
+
+Ahora bien, el segundo elemento importante de la interfaz es la animación que permite emular el comportamiento del \emph{dron} en el espacio de movimiento. Por tanto, aunque no es restricción que ambas componentes de la interfaz (simulador y bloque de animación) sean desarrollados en el mismo lenguaje de programación, sí se considera conveniente esta opción por motivos ligados principalmente a la reducción en tiempos de desarrollo y a una mayor compatibilidad entre componentes.\\
+
+Adicional a esto, se recuerda que MATLAB posee además de la consola de comandos y el entorno de programación gráfico SIMULINK, un entorno para el desarrollo de interfaces de usuario denominado GUIDE (Graphical User Interface Development Environment).\\
+
+Tomando en consideración todo lo anterior, se selecciona MATLAB \emph{vR2014a} para construir la interfaz de usuario que satisface los requerimientos de diseño ilustrados en el diagrama de nivel de partición presentado en la Fig. \ref{1515}.
+
+% ------------------------------------------------------------------------
+\subsection*{Descripción de interfaz diseñada}
+% ------------------------------------------------------------------------
+\begin{figure}
+\centering
+\caption[]{Presentación final para interfaz desarrollada}\label{siete}
+\includegraphics[width=0.7\textwidth]{figs/interfaz}
+% Si la figura posee una fuente distinta a los autores descomente la línea a continuación de este comentario,
+% tomando en cuenta que debe realizar una cita previa fuera del caption para crear la referencia, tal y como
+% lo presenta el ejemplo para la Figura \label{cuerpolibre}
+% \caption*{Fuente: \arabic{footnote}.}
+\end{figure}
+
+% ------------------------------------------------------------------------
+\noindent Procediendo con el diseño, se realiza codificación en MATLAB para el diagrama de bloques de la Fig. \ref{1515}, asumiendo las siguientes variables de entrada:
+% ------------------------------------------------------------------------
+\begin{itemize}
+    \item Parámetros de la planta: [$g$, $m$, $l$, $k_\tau$, $b$, $J_G$, $I_{xx}$, $I_{yy}$, $I_{zz}$, $A_z$];
+    \item Selección del tipo de escenario de control: [lazo abierto, lazo cerrado, PID, regulado espacio de estados, seguimiento espacio de estados];
+    \item Parámetros de simulación: [tiempo de simulación, tiempo de perturbación, amplitud de perturbación],
+\end{itemize}
+% ------------------------------------------------------------------------
+y de salida:
+% ------------------------------------------------------------------------
+\begin{itemize}
+ \item Comportamiento en el tiempo de variables para sistema \emph{dron}: [posición en eje $z$; ángulos de balanceo $\phi$, cabeceo $\theta$ y guiñada $\psi$; vector de velocidades de traslación $\mathbf{v}$; vector de velocidades angulares $\mathbf{\eta}$; vector de forzantes de control $\Delta\boldsymbol\tau$].
+\end{itemize}\
+% ------------------------------------------------------------------------
+
+\noindent Asimismo, se requieren los comandos de control de interfaz siguientes:
+% ------------------------------------------------------------------------
+\begin{itemize}
+ \item Reset: para reiniciar las variables del programa;
+ \item Tipo de visualización: para seleccionar el gráfico de salida a visualizar;
+ \item Simular: para llamar el inicio de una simulación;
+ \item Salida: para terminar el programa.
+\end{itemize}\
+% ------------------------------------------------------------------------
+
+\noindent Todo lo anterior fue adecuado como se presenta en la Fig. \ref{siete}, ilustrando la presentación final de la interfaz desarrollada.
+% ------------------------------------------------------------------------ 

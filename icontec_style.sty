@@ -1,0 +1,284 @@
+% ------------------------------------------------------------------------
+%
+% ------------------      uislatexstyleICONTEC.sty       ---------------------
+%
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Librería para realización de informes de trabajo de grado en formato APA
+% construida para uso de la Universidad Industrial de Santander.
+%
+% Reservados todos los derechos
+%
+% Bucaramanga, Colombia
+%
+% Septiembre 17 de 2018
+%
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+%
+% ------------------------------------------------------------------------
+% Librería requeridas para crear hipervínculos en PDF
+% ------------------------------------------------------------------------
+\usepackage[linktoc=all]{hyperref}
+% ------------------------------------------------------------------------
+% Librería que permite modificar el estilo de los títulos de las secciones
+% del documento
+% ------------------------------------------------------------------------
+\usepackage{titlesec}
+% ------------------------------------------------------------------------
+% Librerías que permiten modificar atributos de la tabla de contenido
+% ------------------------------------------------------------------------
+\usepackage{titletoc}
+\usepackage[subfigure]{tocloft}
+% ------------------------------------------------------------------------
+% Librería para reconocimiento de ñ y acentos del español
+% ------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+% ------------------------------------------------------------------------
+% Librería para alteración de contador de objetos en capítulos
+% ------------------------------------------------------------------------
+\usepackage{chngcntr}
+% ------------------------------------------------------------------------
+% Librería para eliminar sangría de nota al pie
+% ------------------------------------------------------------------------
+\usepackage[hang,flushmargin]{footmisc}
+% ------------------------------------------------------------------------
+% Librería para nombres en listas y configuración de alineación izquierda
+% y un solo punto antes de la descripción
+% ------------------------------------------------------------------------
+\usepackage[labelsep=period]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+% ------------------------------------------------------------------------
+% Márgenes de documento
+% ------------------------------------------------------------------------
+\usepackage[top=3cm, bottom=3cm, left=4cm, right=2cm]{geometry}
+\topmargin 0pt
+\textheight 21 cm
+% ------------------------------------------------------------------------
+% Librería que permite manipular el formato de bibliografía
+% ------------------------------------------------------------------------
+\usepackage[hyperref=true,
+            citereset=none,
+            url=false,
+            isbn=false,
+            backref=true,
+            style=verbose-note,
+            dashed=true,
+            maxcitenames=3,
+            maxbibnames=3,
+            backend=bibtex,
+            block=none,
+            defernumbers=true]{biblatex}
+% ------------------------------------------------------------------------
+% Selección de tipo de fuente
+% ------------------------------------------------------------------------
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+% ------------------------------------------------------------------------
+% Selección de interlineado
+% ------------------------------------------------------------------------
+\usepackage{setspace}
+\spacing{1.5}
+% ------------------------------------------------------------------------
+% Configuración para pies de página
+% ------------------------------------------------------------------------
+\usepackage[hang]{footmisc}
+\setlength{\footnotemargin}{1.5em}
+\setlength{\skip\footins}{1\baselineskip}
+\setlength{\footnotesep}{\skip\footins}
+\renewcommand{\hangfootparskip}{0pt}
+\renewcommand{\hangfootparindent}{1.5em}
+% ------------------------------------------------------------------------
+% Elimina indentación o sangría al inicio de un párrafo
+% ------------------------------------------------------------------------
+\setlength\parindent{0pt}
+% ------------------------------------------------------------------------
+% Elimina indentación o sangría en listas que definen glosario y resumen
+% ------------------------------------------------------------------------
+\renewenvironment{description}[1][0pt]
+  {\list{}{\labelwidth=0pt \leftmargin=#1
+   \let\makelabel\descriptionlabel}}
+  {\endlist}
+% ------------------------------------------------------------------------
+% Definición de estilo para secciones y subsecciones en el texto
+% ------------------------------------------------------------------------
+\titleformat{\chapter}{\normalfont\normalsize\bfseries\centering}{\thechapter. }{0pt}{}
+\titlespacing{\chapter}{0pt}{0pt}{20pt}
+
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection. }{0pt}{}
+
+\titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection. }{0pt}{}
+\titlespacing{\subsection}{0pt}{20pt}{20pt}
+
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection. }{0pt}{}
+\titlespacing{\subsubsection}{0pt}{20pt}{20pt}
+% ------------------------------------------------------------------------
+% Definición para capítulo sin número en tabla de contenidos
+% ------------------------------------------------------------------------
+\def\nnchapter#1{
+    \chapter*{#1}
+    \addcontentsline{toc}{chapter}{#1}}
+% ------------------------------------------------------------------------
+% Definición para sección sin número en tabla de contenidos
+% ------------------------------------------------------------------------
+\def\nnsection#1{
+    \section*{#1}
+    \addcontentsline{toc}{section}{#1}}
+% ------------------------------------------------------------------------
+% Definición para subsección sin número en tabla de contenidos
+% ------------------------------------------------------------------------
+\def\nnsubsection#1{
+    \subsection*{#1}
+    \addcontentsline{toc}{subsection}{#1}}
+% ------------------------------------------------------------------------
+% Definición para lista de anexos
+% ------------------------------------------------------------------------
+\newcommand{\listanexoname}{\hfill\normalfont\normalsize\bfseries LISTA DE ANEXOS\hfill}
+\newlistof[chapter]{anexo}{loa}{\listanexoname}
+\newcommand{\anexo}[1]{%
+\refstepcounter{anexo}
+% ------------------------------------------------------------------------
+% Si sus anexos son menos de 27 debe descomentar estas líneas
+% ------------------------------------------------------------------------
+\par\noindent\textbf{Anexo \Alph{anexo}. #1}
+\addcontentsline{loa}{anexo}{\protect\numberline{\Alph{anexo}}#1}\par
+% ------------------------------------------------------------------------
+% Si sus anexos son más de 27 debe descomentar estas líneas
+% ------------------------------------------------------------------------
+%\par\noindent\textbf{Anexo \arabic{anexo}. #1}
+%\addcontentsline{loa}{anexo}{\protect\numberline{\arabic{anexo}}#1}\par
+% ------------------------------------------------------------------------
+% Si sus anexos van en CD debe descomentar esta línea
+% ------------------------------------------------------------------------
+%\pagenumbering{gobble}
+}
+% ------------------------------------------------------------------------
+% Elimina indentación o sangría en la tabla de contenidos
+% ------------------------------------------------------------------------
+\setlength{\cftsecindent}{0cm}
+\setlength{\cftsubsecindent}{0cm}
+\setlength{\cftsubsubsecindent}{0cm}
+% ------------------------------------------------------------------------
+\setlength{\cftfigindent}{0cm}
+\setlength{\cfttabindent}{0cm}
+\setlength{\cftanexoindent}{0cm}
+% ------------------------------------------------------------------------
+% Elimina rellenado con puntos en la tabla de contenidos
+% ------------------------------------------------------------------------
+\renewcommand{\cftdot}{ }
+% ------------------------------------------------------------------------
+% Agrega la contracción "pag." a la tabla de contenidos
+% ------------------------------------------------------------------------
+\addtocontents{toc}{~\hfill\textbf{pág.}\par}
+\addtocontents{lof}{~\hfill\textbf{pág.}\par}
+\addtocontents{lot}{~\hfill\textbf{pág.}\par}
+% ------------------------------------------------------------------------
+% Si sus anexos van en CD debe comentar esta línea
+% ------------------------------------------------------------------------
+\addtocontents{loa}{~\hfill\textbf{pág.\vspace{0.35 cm}}\par}
+% ------------------------------------------------------------------------
+% Si sus anexos van en CD debe descomentar esta línea
+% ------------------------------------------------------------------------
+%\addtocontents{loa}{\textbf{(Ver anexos adjuntos en el CD y pueden visualizarlos en la Base de Datos de la Biblioteca UIS)\vspace{0.35 cm}}\par}
+% ------------------------------------------------------------------------
+% Define distancia antes y después del título de la tabla de contenidos
+% ------------------------------------------------------------------------
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{20pt}
+\setlength{\cftbeforeloftitleskip}{0pt}
+\setlength{\cftafterloftitleskip}{20pt}
+\setlength{\cftbeforelottitleskip}{0pt}
+\setlength{\cftafterlottitleskip}{20pt}
+\setlength{\cftbeforeloatitleskip}{0pt}
+\setlength{\cftafterloatitleskip}{20pt}
+% ------------------------------------------------------------------------
+% Crea salto de página al final de listas en tabla de contenidos
+% ------------------------------------------------------------------------
+\makeatletter
+\g@addto@macro\@cfttocfinish{\clearpage}
+\makeatother
+% ------------------------------------------------------------------------
+% Convierte en asteriscos numeración de nota al pie en abstract y resumen
+% ------------------------------------------------------------------------
+\newcommand{\astfootnote}[1]{
+\let\oldthefootnote=\thefootnote
+\renewcommand{\thefootnote}{*}
+\footnote{#1}
+\let\thefootnote=\oldthefootnote
+\setcounter{footnote}{0}}
+% ------------------------------------------------------------------------
+\newcommand{\asttfootnote}[1]{
+\let\oldthefootnote=\thefootnote
+\renewcommand{\thefootnote}{**}
+\footnote{#1}
+\let\thefootnote=\oldthefootnote
+\setcounter{footnote}{0}}
+% ------------------------------------------------------------------------
+% Subrutina que evita renombrar bibliografía existente
+% ------------------------------------------------------------------------
+\makeatletter
+\DeclareCiteCommand{\myfootcite}
+  {}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{myfootcite}}
+  {}
+  {}
+
+\newbibmacro*{myfootcite}{%
+  \ifciteseen
+    {\usebibmacro{myfootcite:note}}
+    {\mkbibfootnote{\usebibmacro{footcite:full}%
+     \usebibmacro{footcite:save}}}}
+
+\newbibmacro*{myfootcite:note}{\footref{cbx@\csuse{cbx@f@\thefield{entrykey}}}}
+\makeatother
+% ------------------------------------------------------------------------
+% Permite visualizar bibliografía sin número y ajusta separación de
+% elementos de la lista
+% ------------------------------------------------------------------------
+\DeclareFieldFormat{labelnumberwidth}{#1}
+\setlength\bibitemsep{3.0\itemsep}
+% ------------------------------------------------------------------------
+% Ajusta espacio horizontal de nombre en lista de tablas, figuras y anexos
+% ------------------------------------------------------------------------
+\setlength{\cftfignumwidth}{0.4in}
+\setlength{\cfttabnumwidth}{0.4in}
+\setlength{\cftanexonumwidth}{0.4in}
+% ------------------------------------------------------------------------
+% Agrega la palabra Figura, Tabla y Anexo, respectivamente a la lista de
+% figuras, tablas y anexos
+% ------------------------------------------------------------------------
+\renewcommand{\cftfigfont}{Figura }
+\renewcommand{\cfttabfont}{Tabla }
+\renewcommand{\cftanexofont}{Anexo }
+% ------------------------------------------------------------------------
+% Ajusta contador para enumeración continua de objetos en el documento
+% ------------------------------------------------------------------------
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{anexo}{chapter}
+\counterwithout{footnote}{chapter}
+\counterwithout{equation}{chapter}
+% ------------------------------------------------------------------------
+% Configura fuente y centra nombre de TOC, LOF, LOT y LOA (lista de anexos)
+% ------------------------------------------------------------------------
+\addto\captionsspanish{
+  \renewcommand{\contentsname}{\hfill\normalfont\normalsize\bfseries CONTENIDO\hfill}
+  \renewcommand{\listfigurename}{\hfill\normalfont\normalsize\bfseries LISTA DE FIGURAS\hfill}
+  \renewcommand{\listtablename}{\hfill\normalfont\normalsize\bfseries LISTA DE TABLAS\hfill}
+  \renewcommand{\cftaftertoctitle}{\hfill}
+  \renewcommand{\cftafterloatitle}{\hfill}
+  }
+% ------------------------------------------------------------------------
+% Ajusta nombre de tablas
+% ------------------------------------------------------------------------
+\renewcommand\spanishtablename{Tabla}
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
