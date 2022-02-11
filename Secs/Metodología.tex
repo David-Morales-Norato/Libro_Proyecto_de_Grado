@@ -14,14 +14,14 @@ El enfoque de red neuronal profunda propuesto para la clasificación de objetos 
 \begin{figure*}[!h]
     \centering
     \includegraphics[width=\linewidth]{images/esquema_entrenamiento.pdf}
-    \caption{\textcolor{red}{Esquema de red neuronal profunda de tres etapas propuesto para la clasificación de objetos desde medidas cuadráticas codificadas. HAY QUE CAMBIAR LA IMAGEN, ESTA NO TIENE LAS 3 ETAPAS. Posiblemente modificar la figura de la ampliación del artículo para que en vez de las unets tenga la arquitectura de clasificación.}}
+    \caption{Esquema de red neuronal profunda de tres etapas propuesto para la clasificación de objetos desde medidas cuadráticas codificadas.}
     \label{fig:esquema_entrenamiento}
 \end{figure*}
 
 
 \section{Bloque de inicialización}
 
-Para realizar la etapa de inicialización del campo óptico, este trabajo toma ventaja del hecho de que la matriz de adquisición $\mathbf{A}_\ell$ es conocida, por lo tanto, se crea un mapeo $\mathcal{B}(\cdot)$ que pasa de las medidas $\mathbf{y}_\ell$ a una aproximación más cercana del campo óptico $\mathbf{x}$, dada por el desenvolvimiento de un algoritmo tradicional y un conjunto de capas convolucionales, de tal forma que $\hat{\mathbf{x}}=\mathcal{B}(\mathbf{y}_\ell)$. 
+Para realizar la etapa de inicialización del campo óptico, este trabajo toma ventaja del hecho de que la matriz de adquisición $\mathbf{A}_k$ es conocida, por lo tanto, se crea un mapeo $\mathcal{B}(\cdot)$ que pasa de las medidas $\mathbf{y}_k$ a una aproximación más cercana del campo óptico $\mathbf{x}$, dada por el desenvolvimiento de un algoritmo tradicional y un conjunto de capas convolucionales, de tal forma que $\hat{\mathbf{x}}=\mathcal{B}(\mathbf{A}_k, \mathbf{y}_k)$. 
 
 % El primer enfoque usa el operador de propagación hacia atrás inverso $\mathcal{P}_\ell:\mathbb{C}^n\rightarrow \mathbb{C}^n$ del campo óptico para aproximar$\hat{\mathbf{x}}$  \myfootcite{katkovnik2017computational}, que viene dado por
 
@@ -34,7 +34,7 @@ Más concretamente este enfoque aplica un desenvolvimiento del algoritmo de inic
 
 \begin{algorithm}[!h]
     %\scriptsize
-    \caption{Algoritmo FSI}\label{fsi_algo}
+    \caption{Algoritmo FSI}%\label{fsi_algo}
     \textbf{Entrada:} Matriz de sensado y medidas adquiridas $\{(\mathbf{A}_\ell;\mathbf{y}_\ell)\}_{\ell=1}^L$, máximo número de iteraciones $T$ y el filtro pasa bajas $ \mathbf{G}$.\newline
     \textbf{Salida:} $\hat{\mathbf{x}}$.
     \begin{algorithmic}[1]
@@ -60,7 +60,7 @@ Más concretamente este enfoque aplica un desenvolvimiento del algoritmo de inic
 El algoritmo FSI crea el conjunto de índices $\Xi_\ell$ correspondientes a los valores más grandes de $\{(\mathbf{y}_\ell)_{i}/\vert \vert\mathbf{a}_{\ell,i}\vert \vert_2\}$, donde $\mathbf{a}_{\ell,i}\in\mathbb{C}^{n}$ representan las filas de $\mathbf{A}_\ell$. Adicionalmente, el algoritmo incluye un filtro $\mathbf{G}$, el cual fue implementado como una capa convolucional, de tal manera que cada iteración del algoritmo FSI se aplica un filtrado que promueve mejoría en la aproximación, por lo tanto una mejora en la clasificación. 
 \section{Bloque de clasificación}
 
-En este trabajo se hizo uso de la arquitectura de red de clasificación MobilNetV2 \myfootcite{sandler2018mobilenetv2} como la red de clasificación $f_\theta(\cdot)$. La Figura. \ref{fig:mobilnetv2} ilustra la arquitectura usada. La entrada pasa a través de una capa convolucional con 32 canales, luego, 7 bloques residuales de cuello de botella reducen la dimensión de los datos y aumentan el número de canales para extraer las características. Finalmente, la capa convolucional resultante toma una entrada con forma de $1\times1\times1280$ para aplicar filtros convolucionales de $1\times1$ con el número de canales igual al numero de clases en el dataset.
+En este trabajo se hizo uso de diferentes arquitecturas de clasificación del estado del arte. \textcolor{red}{Explicar cada una?} de red de clasificación MobilNetV2 \myfootcite{sandler2018mobilenetv2} como la red de clasificación $f_\theta(\cdot)$. La Figura. \ref{fig:mobilnetv2} ilustra la arquitectura usada. La entrada pasa a través de una capa convolucional con 32 canales, luego, 7 bloques residuales de cuello de botella reducen la dimensión de los datos y aumentan el número de canales para extraer las características. Finalmente, la capa convolucional resultante toma una entrada con forma de $1\times1\times1280$ para aplicar filtros convolucionales de $1\times1$ con el número de canales igual al numero de clases en el dataset.
 
 \begin{figure}[!h]
     \centering
@@ -77,3 +77,33 @@ Para entrenar los pesos $\theta$ de la red de clasificación $f_\theta(\cdot)$, 
 \end{equation}
 
 Este problema minimiza la función pérdida usualmente llamada entropía categórica cruzada $\mathcal{L}(\cdot, \cdot)$ entre las etiquetas del dataset $c^{(j)}$, y las clases predichas $\hat{c}^{(j)} = f_\theta(\mathcal{B}(\mathbf{y}_\ell^{(j)}))$, donde $J$ es el número total de medidas y $\mathbf{y}_\ell^{(j)}$ es la medida cuadrática codificada al  j-ésimo ejemplo.
+
+
+\subsection{Entrenamiento del esquema propuesto}
+
+El Algoritmo \ref{alg:algoritmo_2} resume el proceso de entrenamiento del esquema mostrado en la Figura \ref{fig:esquema_entrenamiento},  Para entrenar el esquema propuesto. Inicialmente, en la línea 2, el filtro de inicialización es inicializado usando una distribución uniforme $\mathcal{U}(\mathbf{0},\mathbf{1})$. Luego, el modelo de propagación descrito por la Ecuación \eqref{eq:phase_retrieval_problem} es simulado por la capa de adquisición en la línea 5. Posteriormente se realiza el proceso de inicialización el cual aproximará las medidas cuadráticas codificadas al campo óptico inicial en la línea 6. Para obtener una clasificación se hace uso de el bloque de clasificación en la línea 7. En las líneas 8-10, el optimizador Adam $\mathcal{A}_{dam}(\cdot)$ se implementa para minimizar esta función de pérdida sobre el filtro de la inicialización y los parámetros de la red neuronal de clasificación ponderados por $\beta_1$ y $\beta_2$, respectivamente . Finalmente, estos parámetros óptimos $\mathbf{G}$ y $\boldsymbol{\theta}$ se retornan en la línea 13.
+\begin{algorithm}[!h]
+        \caption{Entrenamiento del esquema propuesto.}
+            \label{alg:algoritmo_2}
+        	\begin{algorithmic}[1]
+            \State{\textbf{Entrada:} Conjunto de entrenamiento $\{\mathbf{x}^{(k)}\}_{k=1}^\mathcal{K}$ con $\mathcal{K}$ imágenes.}  
+            \State{\textbf{Inicialización filtro:} {\small
+            $\mathbf{G}\in \mathcal{U}(\mathbf{0},\mathbf{1})^{5 \times 5}$} }
+            \For{época = 1:$\mathcal{E}$}\Comment{$\mathcal{E}$ épocas}
+                \For{$k= 1$:$\mathcal{K}$}\Comment{$\mathcal{K}$ ejemplos}
+                    \State{$\mathbf{y}_{\ell,\psi} = \vert \mathbf{A}_{\ell,\psi}\mathbf{x}^{(k)}\vert^2, \quad \ell\in\{1,\dots,L\}$}
+                    \Comment{Médidas cuadráticas codificadas}
+                    \State{$\tilde{\mathbf{z}}^{(k)} \leftarrow  { \mathcal{B}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_\ell\right)}$}\Comment{Bloque de inicialización \ref{alg_1}}
+                    \State{$\mathbf{c}^{(k)} \leftarrow  f_{\boldsymbol{\theta}}\left(\tilde{\mathbf{z}}^{(k)}\right)$}\Comment{Bloque de clasificación}
+                    \State{$\mathcal{L}_{\mathbf{G},\boldsymbol{\theta}}=\frac{1}{\mathcal{K}}\sum_{k=1}^{\mathcal{K}} \mathcal{L}\left( c^{(k)}, f_{\mathbf{\theta}}\left(\mathcal{B}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_\ell\right)^{(k)}\right)\right) $}    
+               % \Comment{Loss function}     
+                    \State{$\mathbf{G}\leftarrow\mathcal{A}_{dam}( \mathbf{G}, \beta_1 \nabla_{\mathbf{G}} \mathcal{L}_{\mathbf{G},\boldsymbol{\theta}}) $}    
+                \Comment{Optimización sobre $\mathbf{G}$ }
+                      \State{$\boldsymbol{\theta}\leftarrow\mathcal{A}_{dam}( \boldsymbol{\theta}, \beta_2 \nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathbf{G},\boldsymbol{\theta}}) $}    
+                \Comment{Optimización sobre $\boldsymbol{\theta}$ }
+                \EndFor
+                \EndFor
+		\State{\textbf{Return: } Kernel óptimo $\mathbf{G}$ parámetros $\boldsymbol{\theta}$ de la red neuronal.}
+	\end{algorithmic}
+	%\label{alg:algoritmo_2}
+\end{algorithm}
