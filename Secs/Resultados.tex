@@ -148,7 +148,7 @@ Las métricas usadas para evaluar la clasificación se presentan a continuación
     \end{equation}
 \end{itemize}
 
-\subsection{Configuración experimentos}
+\subsection{Configuración experimental}
 
 En esta sección, se presentan los parámetros de simulación utilizados para el modelo de propagación, el bloque de inicialización y la red neuronal de clasificación. La Tabla \ref{tab:parameters} presenta los parámetros ópticos fijados para calcular la matriz $\mathbf{A}_{\ell,\psi}$ \eqref{eq:phase_retrieval_problem} definido en cada campo de difracción. Estos parámetros permiten simular la adquisición de las medidas cuadráticas codificadas a lo largo de cada campo de difracción usando la capa de adquisición óptica. En el bloque de inicialización, el filtro $\mathbf{G} \in \mathbb{C}^{g\times g}$ entrenable fue fijado a un tamaño de kernel $g=5$ y un número de iteraciones $T=10$. Finalmente, el bloque de clasificación fue entrenado usando una tasa de aprendizaje de $1\times 10^{-3}$ con el algoritmo Adam, que requiere $\mathcal{E}=100$ épocas para entrenar sobe los conjuntos de datos MNIST y Fashion-MNIST. Todos los experimentos realizados en este trabajo fueron implementados en \textit{Python 3.9} usando la herramienta \textit{Tensorflow 2.4.1}  \myfootcite{tensorflow2015-whitepaper} para implementar redes neuronales, Los experimentos se ejecutaron sobre un computador con GPU Nvidia 3090 RTX con 64 Gb de memoria RAM y un CPU Intel(R) Xeon(R) W-3223 CPU @ 3.50GHz. El código usado para los experimentos de este trabajo puede ser encontrado de manera pública en el siguiente repositorio 
 
@@ -165,7 +165,7 @@ Distancia de propagación ($z$) [cm]         &    2.5                       & 7 
 \end{table}
 
 
-\subsection{Experimentos de la estimación inicial.}
+\subsection{Resultados de la inicialización}
 
 
 la Figura \ref{fig:results_initializations} muestra el desempeño en la métrica de RE del método de estimación inicial propuesto  comparando con los algoritmos FSI, OPI y WMCI variando el número de iteraciones $T$ para los conjuntos de datos MNIST y Fashion-MNIST en los tres campos de difracción, donde se resalta el método propuesto debido a que en todos los casos logra superar los métodos tradicionales obteniendo una estimación inicial en un número menor de iteraciones.
@@ -196,9 +196,9 @@ Por último, La Figura \ref{fig:resultados_inicialización_sin_ruido} muestra lo
     \label{fig:resultados_inicialización_sin_ruido}
 \end{figure}
 
-\subsection{Experimentos de la clasificación.}
+\subsection{Resultados de la clasificación de objetos}
 
-Los resultados de los experimentos de clasificación se resumen a continuación. Las Figuras \ref{fig:results_acc}, \ref{fig:results_pre},  \ref{fig:results_rec}, \ref{fig:results_f1} muestran los resultados del desempeño de la clasificación de medidas cuadráticas codificadas sobre las métricas de exactitud en la Figura \ref{fig:results_acc}, presición en la Figura \ref{fig:results_pre}, exahustividad  en la Figura \ref{fig:results_rec} y F1 en la Figura \ref{fig:results_f1}. La clasificación se realizó sobre medidas simuladas en los campos de difracción cercano, medio y lejano. Adicionalmente comparando el método propuesto con la manera tradicional y utilizando un operador inverso sobre las medidas como alternativa a la estimación inicial. Como método de clasificación se usaron las arquitecturas de clasificación MobilNetV2, InceptionV3 y Xception sobre los conjuntos de datos Fashion-MNIST y MNIST.
+Los resultados de los experimentos de clasificación se resumen a continuación. Las Figuras \ref{fig:results_acc}, \ref{fig:results_pre},  \ref{fig:results_rec}, \ref{fig:results_f1} muestran los resultados del desempeño de la clasificación de medidas cuadráticas codificadas sobre las métricas de exactitud en la Figura \ref{fig:results_acc}, presición en la Figura \ref{fig:results_pre}, exhaustividad  en la Figura \ref{fig:results_rec} y F1 en la Figura \ref{fig:results_f1}. La clasificación se realizó sobre medidas simuladas en los campos de difracción cercano, medio y lejano. Adicionalmente comparando el método propuesto con la manera tradicional y utilizando un operador inverso sobre las medidas como alternativa a la estimación inicial. Como método de clasificación se usaron las arquitecturas de clasificación MobilNetV2, InceptionV3 y Xception sobre los conjuntos de datos Fashion-MNIST y MNIST.
 
 
 \begin{figure*}[!h]
@@ -226,7 +226,7 @@ Los resultados de los experimentos de clasificación se resumen a continuación.
 
 \begin{figure*}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/test_result_f1_score.pdf}
+    \includegraphics[width=\linewidth]{images/test_result_F1.pdf}
     \caption{Resultados en la métrica de F1 para evaluar la clasificación de medidas cuadráticas codificadas simuladas sobre el campo cercano, medio y lejano. Se muestra la comparación de la clasificación tradicional, el uso del propagador inverso y el método propuesto usando las arquitecturas de MobilNetV2, InceptionV3 y Xception sobre la división de prueba de los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:results_f1}
 \end{figure*}
