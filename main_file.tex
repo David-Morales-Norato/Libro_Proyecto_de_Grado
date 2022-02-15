@@ -21,6 +21,8 @@
 % ------------------------------------------------------------------------
 \documentclass[letter,oneside,12pt,spanish]{report}          % Encabezados
 \usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
 %\usepackage[latin]{babel}
 % ------------------------------------------------------------------------
 \usepackage{icontec_style}                   % Libreria UIS ICONTEC
@@ -28,6 +30,7 @@
 % Ingrese en este punto las librerías específicas de usuario
 % ------------------------------------------------------------------------
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{subfigure}
 \usepackage{hyperref}
@@ -58,9 +61,9 @@
 % ------------------------------------------------------------------------
 \input{Secs/Portada}   % Portada, contraportada, formato de nota y autorización
 % ------------------------------------------------------------------------
-\input{Secs/Dedicatoria}                                     % Dedicatoria
+% \input{Secs/Dedicatoria}                                     % Dedicatoria
 % ------------------------------------------------------------------------
-\input{Secs/Agradecimientos}                             % Agradecimientos
+% \input{Secs/Agradecimientos}                             % Agradecimientos
 % ------------------------------------------------------------------------
 \tableofcontents                                      % Tabla de contenido
 % ------------------------------------------------------------------------
@@ -68,7 +71,7 @@
 \listoftables
 %\listofanexo
 % ------------------------------------------------------------------------
-\input{Secs/Glosario}                               % Glosario de términos
+%\input{Secs/Glosario}                               % Glosario de términos
 % ------------------------------------------------------------------------
 % Contenido del Informe
 % ------------------------------------------------------------------------
@@ -82,9 +85,9 @@
 \input{Secs/Marco_de_referencia} % Marco de referencia
 \input{Secs/Metodología} % Modelo matemático del DRON
 \input{Secs/Resultados} % Controladores PI y su conjunto estabilizante
-% \input{Secs/T5} % Recomendaciones
-\input{Secs/Trabajo_Futuro} % Trabajo futuro
 \input{Secs/Conclusiones} % Conclusiones
+\input{Secs/Trabajo_Futuro} % Trabajo futuro
+
 % ------------------------------------------------------------------------
 % Bibliografía
 % ------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 \chapter{ADQUISICIÓN DE LA INFORMACIÓN DE FASE}
 
-Los sistemas ópticos tradicionales captan únicamente la información de la intensidad de la luz incidente sobre el sensor, perdiendo con esto la información de fase, que resulta fundamental en aplicaciones como cristalografía de rayos-x \myfootcite{pinilla2018coded}, astronomía \myfootcite{fienup1987phase}, holografía \myfootcite{rivenson2018phase}, entre otras. Por lo tanto, la obtención de la información de fase  requiere la implementación  de sistemas ópticos que logren codificar la fase del campo óptico, preservándola implícita en las medidas de intensidad adquiridas. 
+Los sistemas ópticos tradicionales captan únicamente la información de la intensidad de la luz incidente sobre el sensor, perdiendo la información de fase, que resulta fundamental en aplicaciones, tales como, cristalografía de rayos-x \myfootcite{pinilla2018coded}, astronomía \myfootcite{fienup1987phase}, holografía \myfootcite{rivenson2018phase}, entre otras. Por lo tanto, la obtención de la información de fase  requiere la implementación  de sistemas ópticos que logren codificar la fase del campo óptico, preservándola implícita en las medidas de intensidad adquiridas. 
     
 \section{SISTEMA ÓPTICO DE DIFRACCIÓN}
 En múltiples áreas de la ciencia e ingeniería se presenta la adquisición de medidas de intensidad haciendo uso de sistemas ópticos de difracción \myfootcite{fienup1987phase,pinilla2018coded,rivenson2018phase}. La Figura \ref{fig:difraction_systems} muestra un esquema común de los sistemas ópticos de difracción, los cuales se componen por un objeto representado con el vector $\mathbf{z}$ iluminado por luz coherente, modulado en fase por una máscara de fase $\mathbf{D}$, produciendo las medidas cuadráticas codificadas. Dependiendo de la distancia del sensor $L$, la longitud de onda $\lambda$ y el radio de apertura $d$, los modelos de propagación se denominan campo cercano, medio y lejano.
@@ -17,23 +17,31 @@ En múltiples áreas de la ciencia e ingeniería se presenta la adquisición de 
 Debido a que los sensores únicamente captan la información de la intensidad de la luz, el modelo de adquisición en los sistemas ópticos de difracción se describe como
 
 \begin{equation}
-    \mathbf{y}_k = \vert \mathbf{A}_k\mathbf{z} \vert^2, 
+    \mathbf{y}_{\ell, \psi} = \vert \mathbf{A}_{\ell, \psi}\mathbf{z} \vert^2, 
     \label{eq:phase_retrieval_problem}
 \end{equation}
 
-donde $\mathbf{z} \in {\mathbb{C}}^{n}$ es una vectorización del objeto de interés, $\mathbf{y}_k \in \mathbb{R}^{n}$ son las medidas adquiridas y $\mathbf{A}_k\in\mathbb{C}^{n\times n}$ son las matrices que describe la propagación del frente de onda de la luz hasta el sensor, aquí,  $k=1,\dots,K$, siendo $K$ el número total de proyecciones. De acuerdo con la teoría de difracción \myfootcite{poon2014introduction}, la propagación del frente de onda del objeto se modela entre los campos, cercano, medio y lejano dependiendo del número de Fresnel $F = \frac{d^2}{L\lambda}$, que determina el modelado matemático acorde a la zona de difracción en que se captan las medidas.
+donde $\mathbf{z} \in {\mathbb{C}}^{n}$ es una vectorización del objeto de interés, $\mathbf{y}_{\ell, \psi} \in \mathbb{R}^{n}$ son las medidas adquiridas y $\mathbf{A}_{\ell, \psi}\in\mathbb{C}^{n\times n}$ son las matrices que describe la propagación en el campo $\psi$ del frente de onda de la luz hasta el sensor, con,  $\ell=1,\dots,L$, siendo $L$ el número total de proyecciones. De acuerdo con la teoría de difracción \myfootcite{poon2014introduction}, la propagación del frente de onda del objeto se modela entre los campos, cercano, medio y lejano dependiendo del número de Fresnel $F = \frac{d^2}{L\lambda}$, que determina el modelado matemático acorde a la zona de difracción en que se captan las medidas.
 
-\begin{align}
-    \mathbf{y}_k= 
-         \begin{cases}
-            \vert \mathbf{FTF}^{H}\mathbf{D}_k\mathbf{z} \vert^2, & \hfill (\text{Campo Cercano, }F \ll 1) \nonumber, \\ 
-            \vert \mathbf{F}^{H}\mathbf{Q}\mathbf{D}_k\mathbf{z} \vert^2,  & \hfill (\text{Campo Medio, }F \approx 1), \\
-            \vert \mathbf{F}\mathbf{D}_k\mathbf{z} \vert^2,  & \hfill (\text{Campo Lejano, } F \gg 1),   \nonumber
-         \end{cases}
-    \label{eq:modelado_zonas_difraccion}
-\end{align}
+% \begin{align}
+%     \mathbf{y}_k= 
+%          \begin{cases}
+%             \vert \mathbf{FTF}^{H}\mathbf{D}_k\mathbf{z} \vert^2, & \hfill (\text{Campo Cercano, }F \ll 1, \psi=1) \nonumber, \\ 
+%             \vert \mathbf{F}^{H}\mathbf{Q}\mathbf{D}_k\mathbf{z} \vert^2,  & \hfill (\text{Campo Medio, }F \approx 1, \psi=2), \\
+%             \vert \mathbf{F}\mathbf{D}_k\mathbf{z} \vert^2,  & \hfill (\text{Campo Lejano, } F \gg 1, \psi=3),   \nonumber
+%          \end{cases}
+%     \label{eq:modelado_zonas_difraccion}
+% \end{align}
 
-donde $\vert \cdot \vert$ representa el operador de magnitud, $\mathbf{F}$ corresponde a la transformada discreta de Fourier, la matriz diagonal $\mathbf{D}_k \in \mathbb{C}^{n \times n}$ representa las máscaras de fase, finalmente $\mathbf{T} \in \mathbb{C}^{n \times n}$ y $\mathbf{Q} \in \mathbb{C}^{n \times n}$ son matrices ortogonales que modelan la función de transferencia espacial del campo medio y cercano, respectivamente \myfootcite{poon2014introduction,goodman2005introduction}.
+\begin{equation}
+    \mathbf{y}_{\ell,\psi}= \left\{\begin{matrix}
+\vert \mathbf{F}\mathbf{T}\mathbf{F}^\mathcal{H} \mathbf{D}_\ell \mathbf{z} \vert^2 & \text{si } \psi=1\rightarrow \text{Campo cercano}\\ 
+\vert \mathbf{F}^\mathcal{H}\mathbf{Q}\mathbf{D}_\ell \mathbf{z} \vert^2&\text{si } \psi=2\rightarrow\text{ Campo medio} \\ 
+\vert \mathbf{F}\mathbf{D}_\ell \mathbf{z} \vert^2 &\text{si } \psi=3\rightarrow\text{Campo lejano}
+\end{matrix}\right., \label{eq:matrix_a}
+\end{equation}
+
+donde $\vert \cdot \vert$ representa el operador de magnitud, $\mathbf{F}$ corresponde a la transformada discreta de Fourier, la matriz diagonal $\mathbf{D}_\ell \in \mathbb{C}^{n \times n}$ representa las máscaras de fase, finalmente $\mathbf{T} \in \mathbb{C}^{n \times n}$ y $\mathbf{Q} \in \mathbb{C}^{n \times n}$ son matrices ortogonales que modelan la función de transferencia espacial del campo medio y cercano, respectivamente \myfootcite{poon2014introduction,goodman2005introduction}.
 
 \begin{figure}[H]
     \centering
@@ -42,19 +50,39 @@ donde $\vert \cdot \vert$ representa el operador de magnitud, $\mathbf{F}$ corre
     \label{fig:mescla_fases}
 \end{figure}
 
-Cabe señalar la importancia de la información fase en Fourier a partir de la Figura \ref{fig:mescla_fases}. En esta Figura se muestra un experimento desarrollado en \myfootcite{shechtman2015phase} donde se intercambia la información de fase de la transformada de Fourier de dos imágenes, posteriormente se , aplica la transformada de Fourier inversa a este intercambio. En este ejemplo, se observa que en la imagen resultante predomina la información de las fases contrarias.
+Cabe señalar la importancia de la información fase en Fourier a partir de la Figura \ref{fig:mescla_fases}. En esta Figura, se ilustra un experimento desarrollado en \myfootcite{shechtman2015phase} donde se intercambia la información de fase de la transformada de Fourier de dos imágenes, posteriormente, se aplica la transformada de Fourier inversa a este intercambio. En este ejemplo, se observa que en la imagen resultante predomina la información de las fases contrarias.
 
 \section{MEDIDAS CUADRÁTICAS CODIFICADAS}
-Dado la naturaleza cuadrática de la formulación en la Ec. (\ref{eq:phase_retrieval_problem}), este problema se cataloga como NP-difícil. Una forma de mitigar la complejidad de este problema, es incluyendo elementos de modulación de fase aleatorios en la formulación, puesto que, estas máscaras aleatorias permiten generar redundancia en las medidas, que conlleva a la obtención una solución exacta con alta probabilidad si se tienen las suficientes muestras \myfootcite{candes_CDP}.
+Dado la naturaleza cuadrática de la formulación en (\ref{eq:phase_retrieval_problem}), este problema se denomina como NP-difícil. Una forma de mitigar la complejidad de este problema, es incluyendo elementos de modulación de fase aleatorios en la formulación, puesto que, estas máscaras aleatorias permiten generar redundancia en las medidas, que conlleva a la obtención una solución exacta con alta probabilidad si se tienen las suficientes muestras \myfootcite{candes_CDP}.
 
-Las entradas aleatorias de la matriz  $\mathbf{D}_k$ son $i.i.d$ copias de una variable aleatoria $d \in \mathbb{C}$ que satisfacen las siguientes condiciones
+Generalmente, las entradas aleatorias de la matriz  $\mathbf{D}_{\ell} = \mathrm{diag}(\mathbf{d})$ son $i.i.d$ copias de una variable aleatoria $d \in \mathbb{C}$ con $\mathbf{d} \in \{d\}^{n}$, donde $\mathrm{diag}(\cdot)$ devuelve una matriz diagonal cuadrada de un vector dado. Aquí, $d$ representa una modulación pasiva en la fase, se debe imponer que $d$ no aumenta la energía de la escena durante el proceso de modulación, por lo que se establece la Definición \ref{def:admissible}.
 
-\begin{equation}
-    \vert d \vert \leq M, \quad \mathbb{E}[d] = 0, \quad  \mathbb{E}[d^2] = 0, \quad  \mathbb{E}[\vert d \vert^4] = 2\mathbb{E}[\vert d \vert^2]^2,    
-    \label{eq:restricciones_mascara}
-\end{equation}
+\begin{definition}{(Variable aleatorias admisible). \myfootcite{9062527}} 
+    Una variable aleatoria que cumple con $|d|\leq 1$, se considera admisible como elemento de modulación en fase.\label{def:admissible}
+\end{definition}
 
-donde $\mathbb{E}[\cdot]$ corresponde al valor esperado. Aquí, se busca que $M=1$ para que la codificación no incremente la potencia de las medidas cuadráticas.
+
+Algunos ejemplos de variables aleatorias que satisfacen la Definición \ref{def:admissible} se listan en la Tabla \ref{tab:admi_examples}. Estas variables aleatorias como elementos de codificación han sido usados en \myfootcite{9062527}.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Elemento de codificación} & \textbf{Probabilidad}                     \\ \hline
+$d \in \{0, 1\}$         & $\{ \frac{1}{2},  \frac{1}{2}\}$ \\ \hline
+$d \in \{-1, 1\}$        & $\{ \frac{1}{2},  \frac{1}{2}\}$ \\ \hline
+$d \in \{-1, 1, -j,  j\}$ & $\{ \frac{1}{4},  \frac{1}{4}, \frac{1}{4},  \frac{1}{4}\}$ \\ \hline
+\end{tabular}
+\caption{Ejemplos de codificaciones aleatórias admisibles según la Definición \ref{def:admissible}.}
+\label{tab:admi_examples}
+\end{table}
+
+% \begin{equation}
+%     \vert d \vert \leq M, \quad \mathbb{E}[d] = 0, \quad  \mathbb{E}[d^2] = 0, \quad  \mathbb{E}[\vert d \vert^4] = 2\mathbb{E}[\vert d \vert^2]^2,    
+%     \label{eq:restricciones_mascara}
+% \end{equation}
+
+% donde $\mathbb{E}[\cdot]$ corresponde al valor esperado. Aquí, se busca que $M=1$ para que la codificación no incremente la potencia de las medidas cuadráticas.
 
 \chapter{ALGORITMOS DE RECUPERACIÓN DE FASE}
 Para recuperar el campó óptico inicial a partir de medidas cuadráticas codificadas, la literatura ha planteado diferentes algoritmos basados en formulaciones convexas y no convexas.
@@ -68,13 +96,13 @@ Estos tipo de algoritmos relajan el problema recuperación de fase a un problema
     Este algoritmo plantea el problema de recuperación de la fase como una minimización de la traza de la siguiente forma
     \begin{equation}
         \begin{aligned}
-            \minimize_{\mathbf{z} \in \mathbb{C}^{n}} \quad & \quad \mathrm{Tr}(\mathbf{z}\mathbf{z}^{\mathcal{H}}), \\
+            \minimize_{\mathbf{z} \in \mathbb{C}^{n}} \quad & \quad \mathrm{Traza}(\mathbf{z}\mathbf{z}^{\mathcal{H}}), \\
             \subjectto \quad & \quad \mathcal{A}(\mathbf{z}\mathbf{z}^{\mathcal{H}}) = \mathbf{b}, \\
              &\quad  \mathbf{z}\mathbf{z}^{\mathcal{H}} \succ 0,
         \end{aligned}
     \end{equation}
     
-    donde $\mathcal{A}( \cdot ): \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ es un operador lineal y $\mathrm{Tr}(\cdot)$ representa la traza de una matriz.
+    donde $\mathcal{A}( \cdot ): \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$ es un operador lineal y $\mathrm{Traza}(\cdot)$ representa la traza de una matriz.
     
     \item \textbf{PhaseMax} \myfootcite{goldstein2018phasemax}:
     Sea $\mathbf{\hat{z}} \in \mathbb{C}^{n}$ un vector aproximación de la señal original $\mathbf{z}$, de modo que, la señal reconstruida se obtiene solucionando el siguiente problema convexo
@@ -182,7 +210,7 @@ Usualmente no es posible separar los datos linealmente, por esta razón, se pued
 
 \section{K VECINOS MÁS CERCANOS}
 
-K vecinos más cercanos (KNN, por sus siglas en inglés) Propone que un conjunto $D = \{(\mathbf{x}_i, c_i)\}_1^n$, siendo $\mathbf{x}_i$ el vector de características e $c_i$ la clase correspondiente. Para un nuevo vector a clasificar $\mathbf{\hat{x}}$, el algoritmo KNN encuentra los $K$ puntos más cercanos del dataset. La Figura \ref{fig:knn} muestra una representación de la clasificación de dos nuevas muestras en $\mathbb{R}^2$ con $K = 5$. Usualmente la función de distancia usada corresponde a la distancia euclidiana
+K vecinos más cercanos (KNN, por sus siglas en inglés) propone que un conjunto $D = \{(\mathbf{x}_i, c_i)\}_1^n$, siendo $\mathbf{x}_i$ el vector de características e $c_i$ la clase correspondiente. Para un nuevo vector a clasificar $\mathbf{\hat{x}}$, el algoritmo KNN encuentra los $K$ puntos más cercanos del dataset. La Figura \ref{fig:knn} muestra una representación de la clasificación de dos nuevas muestras en $\mathbb{R}^2$ con $K = 5$. Usualmente la función de distancia usada corresponde a la distancia euclidiana
 
 \begin{equation}
     d(\mathbf{x}_p,\mathbf{x}_q) = \Vert \mathbf{x}_p-\mathbf{x}_q \Vert_2
@@ -222,7 +250,7 @@ Los enfoques de aprendizaje profundo han generado un gran progreso en problemas 
     \label{fig:nn}
 \end{figure}
 
-En la Ec. (\ref{eq:red_neuronal}), se muestra el modelado matemático de una red neuronal sencilla. 
+En la ecuación. (\ref{eq:red_neuronal}), se muestra el modelado matemático de una red neuronal sencilla. 
 \begin{equation}
     \footnotesize 
     \big\{f_\theta(\mathbf{x}) = \sigma_{L}(\mathbf{W}_{L}\sigma_{L-1}(\mathbf{W}_{L-1} (\dots \sigma_2(\mathbf{W}_2\sigma_1(\mathbf{W}_1\mathbf{x})))) \quad \vert \quad\theta = \{\mathbf{W}_{1} \dots \mathbf{W}_{L}\}  \big\},
@@ -237,9 +265,21 @@ donde para cada capa $1 \leq \ell \leq L$, $\sigma_\ell$ corresponde a una funci
 \end{equation}
 
 \section{CLASIFICACIÓN USANDO MEDIDAS CUADRÁTICAS}
-Recientemente, en el campo de tomografía computarizada \myfootcite{douarre2020value} e imágenes de un solo píxel \myfootcite{bacca2020coupled}, se han propuesto sistemas de clasificación que usan únicamente medidas obtenidas a través del sistema lineal de adquisición, esto debido al enfoque basado en el aprendizaje profundo en el que la arquitectura incluye una capa con el sistema óptico de adquisición. Este enfoque ha sido estudiado igualmente en imágenes difractivas como en holografía \myfootcite{kim2018deep} y cristalografía de rayos-x \myfootcite{ziletti2018insightful}, donde las medidas obtenidas son difícilmente reconocidas por el ojo humano. 
+En el campo de tomografía computarizada \myfootcite{douarre2020value} e imágenes de un solo píxel \myfootcite{bacca2020coupled}, se han propuesto sistemas de clasificación que usan únicamente medidas obtenidas a través del sistema lineal de adquisición, esto debido al enfoque basado en el aprendizaje profundo en el que la arquitectura incluye una capa con el sistema óptico de adquisición. Este enfoque ha sido estudiado igualmente en imágenes difractivas como en holografía \myfootcite{kim2018deep} y cristalografía de rayos-x \myfootcite{ziletti2018insightful}, donde las medidas obtenidas son difícilmente reconocidas por el ojo humano. 
 
 Sin embargo, estos enfoques propuestos no han sido abordados en imágenes de medidas cuadráticas codificadas, de modo que, este trabajo propone el desarrollo de un algoritmo de clasificación usando medidas cuadráticas codificadas basado en aprendizaje profundo. 
 
+
 \section{CLASIFICACIÓN DE IMÁGENES USANDO REDES NEURONALES ÓPTICAS}
+
+
+Recientemente, se han publicado avances en el campo de redes neuronales implementadas físicamente haciendo uso de propiedades ópticas. Este tipo de redes resaltan debido al hecho que si se realiza la inferencia de manera óptica, la velocidad de cálculo está limitada por la velocidad de la luz en el medio y no requieren una fuente de energía activa para realizar los cálculos. Específicamente en \myfootcite{lin2018all} implementan las capas de una red neuronal haciendo uso de materiales difractados, realizando la modulación de la luz en la fase y aprovechando la propagación del campo óptico para realizar tareas de clasificación
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = 1\linewidth]{images/diffractive_networks.png}
+    \caption{Implementación de redes neuronales ópticas implementadas ópticamente mediante elementos ópticos difractivos. Fuente: Modificado de \textit{All-optical machine learning using diffractive deep neural networks, 2018.}}
+    \label{fig:optical_networks}
+\end{figure}
 

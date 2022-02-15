@@ -1,7 +1,7 @@
 \def\autor{David Santiago Morales Norato}
 \def\titulo{Algoritmo de clasificación de objetos en imágenes difractivas basado en medidas cuadráticas codificadas usando un enfoque de aprendizaje profundo}
-\def\director{PhD.(c). Andrés Felipe Jerez Ariza}
-\def\codirector{Ph.D. Henry Arguello Fuentes}
+\def\director{Andrés Felipe Jerez Ariza}
+\def\codirector{Henry Arguello Fuentes}
 \def\universidad{Universidad Industrial de Santander}
 \def\escuela{Escuela de Ingeniería de Sistemas e Informática}
 \def\facultad{Facultad de Ingenierías Fisicomecánicas}
@@ -16,3 +16,22 @@
 \DeclareMathOperator*{\argmax}{arg \ mix} % Declaración operador arg max
 
 \DeclareMathOperator*{\argmin}{arg \ min} % Declaración operador arg min
+
+\DeclareMathOperator*{\min}{min} % Declaración operador arg min
+
+\newtheorem{definition}{Definición}% Declaración segmento definición matemática
+
+
+% Traducción de palabras reservadas del algoritmo a español
+\newenvironment{algoritmo}[1][]
+  {\begin{algorithm}[#1]
+     \selectlanguage{spanish}%
+     \floatname{algorithm}{Algoritmo}%
+     \renewcommand{\algorithmicif}{\textbf{si}}%
+     \renewcommand{\algorithmicthen}{\textbf{entonces}}%
+     \renewcommand{\algorithmicend}{\textbf{fin}}%
+     \renewcommand{\algorithmicfor}{\textbf{para}}%
+     \renewcommand{\algorithmicdo}{\textbf{hacer}}%
+     % Set other language requirements
+  }
+  {\end{algorithm}}
