@@ -16,7 +16,7 @@ Durante el desarrollo de este trabajo, no se encontraron conjuntos de datos púb
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/datasets.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/datasets.pdf}
     \caption{Ejemplo de las imágenes presentes en los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:conjunto_datos}
 \end{figure}
@@ -133,7 +133,7 @@ Las métricas usadas para evaluar la clasificación se presentan a continuación
     
     \begin{minipage}[!h]{\linewidth}
       
-      \includegraphics[width=\linewidth]{images/esquema_entrenamiento_tradicional.pdf}
+      \includegraphics[width=\linewidth]{images/metodología/esquema_entrenamiento_tradicional.pdf}
       \captionof{figure}{Esquema de clasificación usado en el estado del arte.}
         \label{fig:esquema_entrenamiento_tradicional}
     \end{minipage}
@@ -172,7 +172,7 @@ la Figura \ref{fig:results_initializations} muestra el desempeño en la métrica
 
 \begin{figure}[h!]
 \centering
-         \includegraphics[width=0.8\linewidth]{images/results_initializations.pdf}
+         \includegraphics[width=0.8\linewidth]{images/resultados/results_initializations.pdf}
         \caption{Resumen del desempeño de la inicialización propuesta comparando con los métodos FSI, OPI, WMCI sobre la métrica de RE, variando el número de iteraciones del algoritmo para estimar imágenes de los conjuntos MNIST y Fashion-MNIST en los campos de difracción cercano, medio y lejano.}
         \label{fig:results_initializations}
 \end{figure}
@@ -182,7 +182,7 @@ la Figura \ref{fig:results_initializations} muestra el desempeño en la métrica
 la Figura \ref{fig:noisy_scenario} muestra la evaluación de la robustés del método frente al ruido, adicionando ruido aditivo gausiano con $SNR = 10, 15$ y $30$. Donde se evidencia que el método propuesto muestra una mayor estabilidad al ruido comparando con los método del estado del arte.
 
 \begin{figure}[h!]
-         \includegraphics[width=1\linewidth]{images/Noisy_Initializations.pdf}
+         \includegraphics[width=1\linewidth]{images/resultados/Noisy_Initializations.pdf}
         \caption{Resumen del desempeño de la inicialización comparando con diferentes estrategias del estado del arte. Se varió el número de medidas $T$ para realizar la estimación y diferentes niveles de ruido afectando las medidas descritos por el SNR.}
         \label{fig:noisy_scenario}
 \end{figure}
@@ -191,7 +191,7 @@ Por último, La Figura \ref{fig:resultados_inicialización_sin_ruido} muestra lo
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/resultados_inicialización_sin_ruido.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/resultados_inicialización_sin_ruido.pdf}
     \caption{Resultados visuales de la estimación del campo óptico inicial comparando el método propuesto contra el algoritmo FSI con $L = 1, T = 10$, FSI usando $L = 1, T=200$, OPI $L = 4, T=200$ y WMCI $L = 4, T=200$.}
     \label{fig:resultados_inicialización_sin_ruido}
 \end{figure}
@@ -203,14 +203,14 @@ Los resultados de los experimentos de clasificación se resumen a continuación.
 
 \begin{figure*}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/test_result_acc.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/test_result_Exactitud.pdf}
     \caption{Resultados en la métrica de exactitud para evaluar la clasificación de medidas cuadráticas codificadas simuladas sobre el campo cercano, medio y lejano. Se muestra la comparación de la clasificación tradicional, el uso del propagador inverso y el método propuesto usando las arquitecturas de MobilNetV2, InceptionV3 y Xception sobre la división de prueba de los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:results_acc}
 \end{figure*}
 
 \begin{figure*}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/test_result_pre.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/test_result_Presición.pdf}
     \caption{Resultados en la métrica de presición para evaluar la clasificación de medidas cuadráticas codificadas simuladas sobre el campo cercano, medio y lejano. Se muestra la comparación de la clasificación tradicional, el uso del propagador inverso y el método propuesto usando las arquitecturas de MobilNetV2, InceptionV3 y Xception sobre la división de prueba de los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:results_pre}
 \end{figure*}
@@ -219,14 +219,14 @@ Los resultados de los experimentos de clasificación se resumen a continuación.
 
 \begin{figure*}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/test_result_rec.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/test_result_Exhaustividad.pdf}
     \caption{Resultados en la métrica de exhaustividad para evaluar la clasificación de medidas cuadráticas codificadas simuladas sobre el campo cercano, medio y lejano. Se muestra la comparación de la clasificación tradicional, el uso del propagador inverso y el método propuesto usando las arquitecturas de MobilNetV2, InceptionV3 y Xception sobre la división de prueba de los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:results_rec}
 \end{figure*}
 
 \begin{figure*}[!h]
     \centering
-    \includegraphics[width=\linewidth]{images/test_result_F1.pdf}
+    \includegraphics[width=\linewidth]{images/resultados/test_result_F1.pdf}
     \caption{Resultados en la métrica de F1 para evaluar la clasificación de medidas cuadráticas codificadas simuladas sobre el campo cercano, medio y lejano. Se muestra la comparación de la clasificación tradicional, el uso del propagador inverso y el método propuesto usando las arquitecturas de MobilNetV2, InceptionV3 y Xception sobre la división de prueba de los conjuntos de datos MNIST y Fashion-MNIST.}
     \label{fig:results_f1}
 \end{figure*}
