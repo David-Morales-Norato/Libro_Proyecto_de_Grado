@@ -8,11 +8,11 @@
 
 \chapter{SIMULACIONES Y RESULTADOS}
 
-En esta sección, se presentan los resultados obtenidos a partir del método propuesto para la clasificación de objetos basado en medidas medidas cuadráticas codificadas comparado con esquemas de clasificación del estado del arte.
+En esta sección se presentan los resultados obtenidos a partir del método propuesto para la clasificación de objetos basado en medidas medidas cuadráticas codificadas y su comparación con esquemas de clasificación del estado del arte.
 
 \section{CONJUNTO DE DATOS}
 
-Durante el desarrollo de este trabajo, no se encontraron conjuntos de datos públicos enfocados en la clasificación de medidas cuadráticas. Debido a esto, se decidió simular la propagación de las medidas usando conjuntos de datos tradicionales. Para esto se usaron imágenes de los conjuntos de datos MNIST \myfootcite{deng2012mnist} y Fashion-MNIST \myfootcite{xiao2017fashion}. La Figura \ref{fig:conjunto_datos} muestra un ejemplo de diferentes La Tabla \ref{tab:conjunto_datos} muestra la división de datos en entrenamiento, validación y prueba. Cada imagen fue escalada en el rango de $[-\pi, \pi]$ y usada como información de fase de la forma $\mathbf{z}=e^{j\mathrm{ang}(\mathbf{z})}$.
+Durante el desarrollo de este trabajo, no se encontraron conjuntos de datos públicos enfocados en la clasificación de medidas cuadráticas. Debido a esto, se decidió simular la propagación de las medidas usando conjuntos de datos tradicionales. Para este fin se usaron imágenes de los conjuntos de datos MNIST \myfootcite{deng2012mnist} y Fashion-MNIST \myfootcite{xiao2017fashion}. Por un lado, la Figura \ref{fig:conjunto_datos} muestra un ejemplo de las imágenes presentes en los conjuntos de datos usados. Por otro lado, la Tabla \ref{tab:conjunto_datos} muestra la división de datos en entrenamiento, validación y prueba. Cada imagen fue escalada en el rango de $[-\pi, \pi]$ y usada como información de fase de la forma $\mathbf{z}=e^{j\mathrm{ang}(\mathbf{z})}$.
 
 \begin{figure}[!h]
     \centering
@@ -39,10 +39,10 @@ Fashion-MNIST              & 54000                  & 6000                & 1000
 \end{table}
 
 \section{MÉTRICAS}
-La calidad de la inicialización y la precisión de la clasificación en sistemas de difracción basados en medidas cuadráticas codificadas se mide a través de las siguientes métricas.
-\subsection{Métricas para evaluar la inicialización}
+La calidad de la inicialización y la precisión de la clasificación en sistemas de difracción basados en medidas cuadráticas codificadas, se mide a través de las siguientes métricas.
+\subsection{Métricas para evaluar la inicialización.}
 
-Aquí, se describen las métricas usadas para evaluar la estimación inicial $\hat{\mathbf{z}}$ respecto a la imagen de referencia $\mathbf{z}$.
+A continuación, se describen las métricas usadas para evaluar la estimación inicial $\hat{\mathbf{z}}$ respecto a la imagen de referencia $\mathbf{z}$.
 \begin{itemize}
     \item Medida del índice de similitud estructural (SSIM):
     
@@ -52,7 +52,7 @@ Aquí, se describen las métricas usadas para evaluar la estimación inicial $\h
         \label{eq:SSIM}
     \end{equation}
     
-    donde $(\mu_{\mathbf{z}}, \mu_{{\mathbf{z}}})$ y $(\mu_{\tilde{\mathbf{z}}}, \mu_{\tilde{\mathbf{z}}})$ representan la media y la varianza de ${\mathbf{z}}$ y $\tilde{\mathbf{z}}$ respectivamente, además $\sigma_{\mathbf{z}\tilde{\mathbf{z}}}$ es la covarianza entre ellos. Por último, $C_1 = (k_1L)^2$ y $C_2 = (k_2L)^2$ son dos constantes para prevenir división por cero y $k_1 = 0.01$ y $k_2 = 0.03$. Esta métrica tiene valores en el rango de $[0, 1]$, es decir, a mayor valor, mejor es la estimación.
+    donde $(\mu_{\mathbf{z}}, \sigma_{{\mathbf{z}}})$ y $(\mu_{\tilde{\mathbf{z}}}, \sigma_{\tilde{\mathbf{z}}})$ representan la media y la varianza de ${\mathbf{z}}$ y $\tilde{\mathbf{z}}$ respectivamente, además $\sigma_{\mathbf{z}\tilde{\mathbf{z}}}$ es la covarianza entre ellos. Por último, $C_1 = (k_1L)^2$ y $C_2 = (k_2L)^2$ son dos constantes para prevenir división por cero y $k_1 = 0.01$ y $k_2 = 0.03$. Esta métrica tiene valores en el rango de $[0, 1]$, es decir, a mayor valor, mejor es la estimación.
     
     \item Relación de señal a ruido máxima (PSNR):
     \begin{equation}
@@ -81,12 +81,12 @@ Aquí, se describen las métricas usadas para evaluar la estimación inicial $\h
     
     Esta métrica tiene valores en el rango de $[0, \infty)$, donde a menor valor, mejor es la estimación.
 \end{itemize}
-\subsection{Métricas para evaluar la clasificación}
-Las métricas usadas para evaluar la clasificación se presentan a continuación, donde los valores a calcular dependen de los verdaderos positivos $TP$, verdaderos negativos $TN$, falsos positivos $FP$, y falsos negativos $FN$ asociados a la clase de cada ejemplo del conjunto de datos.
+\subsection{Métricas para evaluar la clasificación.}
+Las métricas usadas para evaluar la clasificación se presentan a continuación, donde los valores a calcular dependen de los verdaderos positivos $TP$, verdaderos negativos $TN$, falsos positivos $FP$, y falsos negativos $FN$, asociados a la clase de cada ejemplo del conjunto de datos.
 
 
 \begin{itemize}
-    \item Exactitud: esta medida corresponde a la proporción de predicciones predichas correctamente.
+    \item Exactitud: esta medida corresponde a la proporción de predicciones predichas correctamente,
 
     \begin{equation}
         \mathrm{Exactitud}= \frac{TP+TN}{TP+TN+FP+FN}.
@@ -94,21 +94,21 @@ Las métricas usadas para evaluar la clasificación se presentan a continuación
     \end{equation}
 
 
-    \item Precisión: esta medida es la proporción de ejemplos pertenecientes a una clase que fueron correctamente predichos en dicha clase.
+    \item Precisión: esta medida es la proporción de ejemplos pertenecientes a una clase que fueron correctamente predichos en dicha clase,
     
         \begin{equation}
             \mathrm{Precision} = \frac{TP}{TP+FP}.
             \label{eq:pre}
         \end{equation}
         
-    \item Exhaustividad: esta medida es la proporción entre las predicciones que fueron correctamente clasificadas en una clase sobre los ejemplos que pertenecían a esa clase.
+    \item Exhaustividad: esta medida es la proporción entre las predicciones que fueron correctamente clasificadas en una clase sobre los ejemplos que pertenecían a esa clase,
     
     \begin{equation}
         \mathrm{Exhaustividad}= \frac{TP}{TP+FN}.
         \label{eq:re}
     \end{equation}
 
-    \item Métrica-F1: esta medida está diseñada para ponderar de manera equilibrada entre las métricas de precisión (\ref{eq:pre}) y exhaustividad (\ref{eq:re}) 
+    \item Métrica-F1: esta medida está diseñada para ponderar de manera equilibrada entre las métricas de precisión (\ref{eq:pre}) y exhaustividad (\ref{eq:re}),
     
     \begin{equation}
         \mathrm{F1} = \frac{2\cdot\mathrm{Precision}\cdot\mathrm{Exhaustividad}}{\mathrm{Precision}+\mathrm{Exhaustividad}}.
@@ -148,21 +148,21 @@ Las métricas usadas para evaluar la clasificación se presentan a continuación
 %     \end{equation}
 % \end{itemize}
 
-\subsection{Configuración experimental}
+\subsection{Configuración experimental.}
 
-Aquí, se presentan los parámetros de simulación utilizados para el modelo de propagación, la etapa de inicialización y la red neuronal de clasificación. La Tabla \ref{tab:parameters} presenta los parámetros ópticos fijados para calcular la matriz $\mathbf{A}_{\ell,\psi}$ definida en \eqref{eq:phase_retrieval_problem} según cada campo de difracción. Estos parámetros permiten simular la adquisición de las medidas cuadráticas codificadas a lo largo de cada campo de difracción usando la capa de adquisición óptica. En la etapa de inicialización, el filtro $\mathbf{G} \in \mathbb{C}^{g\times g}$ entrenable fue fijado a un tamaño de kernel $g=5$ y un número de iteraciones $T=10$. La estimación del campo óptico inicial es una tarea ampliamente estudiada en el estado del arte de recuperación de la fase. Específicamente, se destacan métodos de inicialización, tales como, \textit{orthogonality-promoting initialization} (OPI) \myfootcite{wang2017solving}, \textit{weighted maximal correlation initialization} (WMCI) \myfootcite{wang2018phase}, y FSI \myfootcite{jerez2020fast}. Cabe señalar que, estos métodos de inicialización fueron usados para comparar la inicialización propuesta LFSI, donde se comparó la robustez al ruido, el número de iteraciones ${T}$ y el número de proyecciones ${L}$ requeridas para lograr una estimación apropiada. 
+En esta subsección, se presentan los parámetros de simulación utilizados para el modelo de propagación, la etapa de inicialización y la red neuronal de clasificación. Todos los experimentos realizados en este trabajo fueron implementados en \textit{Python 3.9} usando la herramienta \textit{Tensorflow 2.4.1}  \myfootcite{tensorflow2015-whitepaper}. Los experimentos se ejecutaron sobre un computador con GPU Nvidia 3090 RTX con 64 Gb de memoria RAM y CPU Intel(R) Xeon(R) W-3223 CPU @ 3.50GHz. El código usado para los experimentos de este trabajo puede ser consultado de manera pública en \footnote{\href{https://github.com/David-Morales-Norato/code_undergrad_thesis}{https://github.com/David-Morales-Norato/code\_undergrad\_thesis}}. En relación con los parámetros de propagación,  la Tabla \ref{tab:parameters} presenta los parámetros ópticos fijados para calcular la matriz $\mathbf{A}_{\ell,\psi}$ definida en \eqref{eq:phase_retrieval_problem} según cada campo de difracción. Estos parámetros permiten simular la adquisición de las medidas cuadráticas codificadas a lo largo de cada campo de difracción usando la capa de adquisición óptica. En la etapa de inicialización, el filtro $\mathbf{G} \in \mathbb{C}^{g\times g}$ entrenable fue fijado a un tamaño de kernel $g=5$ y un número de iteraciones $T=10$. La estimación del campo óptico inicial es una tarea ampliamente estudiada en el estado del arte de recuperación de la fase. Específicamente, se destacan métodos de inicialización, tales como \textit{orthogonality-promoting initialization} (OPI) \myfootcite{wang2017solving}, \textit{weighted maximal correlation initialization} (WMCI) \myfootcite{wang2018phase}, y FSI \myfootcite{jerez2020fast}. Cabe señalar que, estos métodos de inicialización fueron usados para comparar la inicialización propuesta LFSI, donde se comparó la robustez al ruido, el número de iteraciones ${T}$ y el número de proyecciones ${L}$ requeridas para lograr una estimación apropiada. 
 
-Finalmente, para realizar la clasificación se usaron las arquitecturas MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3} y Xception \myfootcite{xception}, las cuales fueron entrenadas usando una tasa de aprendizaje de $1\times 10^{-3}$ con el algoritmo de optimización Adam a partir de $\mathcal{E}=100$ épocas para entrenar los conjuntos de datos MNIST y Fashion-MNIST. Para comparar el esquema de clasificación propuesto se implementó el esquema de clasificación tradicional \myfootcite{kim2018deep, ziletti2018insightful}, donde se realiza únicamente el proceso de simulación de las medidas cuadráticas sin el proceso de estimación del campo óptico. Asimismo, se empleó el método propuesto de filtrado espectral aprendido en las Figuras \ref{fig:results_mob}, \ref{fig:results_inc}, \ref{fig:results_xce}. Por otra parte, se reemplazó en la etapa de inicialización del esquema de clasificación propuesto, el algoritmo de inicialización LFSI por el modelo de propagación inverso (BPM, de sus siglas en inglés \textit{back-propagation matrix}) $\mathbf{A}_{\ell, \psi}^{-1}$ para obtener una estimación rápida del campo óptico inicial, como se presenta en las Figuras \ref{fig:results_mob}, \ref{fig:results_inc},  \ref{fig:results_xce}. Esta estimación rápida está dada por 
+Finalmente, para realizar la clasificación se usaron las arquitecturas MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3} y Xception \myfootcite{xception}, las cuales fueron entrenadas usando una tasa de aprendizaje de $1\times 10^{-3}$ con el algoritmo de optimización Adam a partir de $\mathcal{E}=100$ épocas para entrenar los conjuntos de datos MNIST y Fashion-MNIST. Para comparar el esquema de clasificación propuesto se implementó el esquema de clasificación tradicional \myfootcite{kim2018deep}$^,$\myfootcite{ ziletti2018insightful}, donde se realiza únicamente el proceso de simulación de las medidas cuadráticas sin el proceso de estimación del campo óptico. Asimismo, se empleó el método propuesto de filtrado espectral aprendido en las Figuras \ref{fig:results_mob}, \ref{fig:results_inc} y \ref{fig:results_xce}. Por otra parte, se reemplazó en la etapa de inicialización del esquema de clasificación propuesto, el algoritmo de inicialización LFSI por el modelo de propagación inverso (BPM, de sus siglas en inglés \textit{back-propagation matrix}) $\mathbf{A}_{\ell, \psi}^{-1}$ para obtener una estimación rápida del campo óptico inicial, como se presenta en las Figuras \ref{fig:results_mob}, \ref{fig:results_inc} y  \ref{fig:results_xce}. Esta estimación rápida está dada por 
 
 \begin{equation}
-    \hat{\mathbf{z}}= \frac{1}{L}\sum_{\ell=1}^{ L} \mathbf{A}_{\ell, \psi}^{-1}\mathbf{y}_{\ell, \psi},
-    \label{eq:back_propagation}
+    \hat{\mathbf{z}}= \frac{1}{L}\sum_{\ell=1}^{ L} \mathbf{A}_{\ell, \psi}^{-1}\mathbf{y}_{\ell, \psi}
+    \label{eq:back_propagation}.
 \end{equation}
 
 Es importante señalar que, $\mathbf{z} \neq \mathbf{A}_{\ell, \psi}^{-1}\mathbf{y}_{\ell}$, debido a la pérdida de la información de fase que induce el operador de magnitud $\vert \cdot \vert$ presente en el modelo de propagación \eqref{eq:phase_retrieval_problem}.
 
 
-Por último, todos los experimentos realizados en este trabajo fueron implementados en \textit{Python 3.9} usando la herramienta \textit{Tensorflow 2.4.1}  \myfootcite{tensorflow2015-whitepaper}. Los experimentos se ejecutaron sobre un computador con GPU Nvidia 3090 RTX con 64 Gb de memoria RAM y CPU Intel(R) Xeon(R) W-3223 CPU @ 3.50GHz. El código usado para los experimentos de este trabajo puede ser consultado de manera pública en el siguiente enlace: \href{https://github.com/David-Morales-Norato/code_undergrad_thesis}{https://github.com/David-Morales-Norato/code\_undergrad\_thesis}
+% Por último, todos los experimentos realizados en este trabajo fueron implementados en \textit{Python 3.9} usando la herramienta \textit{Tensorflow 2.4.1}  \myfootcite{tensorflow2015-whitepaper}. Los experimentos se ejecutaron sobre un computador con GPU Nvidia 3090 RTX con 64 Gb de memoria RAM y CPU Intel(R) Xeon(R) W-3223 CPU @ 3.50GHz. El código usado para los experimentos de este trabajo puede ser consultado de manera pública en el siguiente enlace: \href{https://github.com/David-Morales-Norato/code_undergrad_thesis}{https://github.com/David-Morales-Norato/code\_undergrad\_thesis}
 
 \begin{table}[!h]
 \centering
@@ -178,7 +178,7 @@ Distancia de propagación ($z$) [cm]         &    2.5                       & 7 
 \end{table}
 
 
-\subsection{Resultados de la inicialización}
+\subsection{Resultados de la inicialización.}
 
 
 La Figura \ref{fig:results_initializations} muestra el desempeño en la métrica de RE del método de estimación inicial propuesto comparando con los algoritmos FSI, OPI y WMCI variando el número de iteraciones $T$ para los conjuntos de datos MNIST y Fashion-MNIST en los tres campos de difracción cercano, medio y lejano, donde se puede observar que el método propuesto logra superar los métodos tradicionales obteniendo una estimación inicial apropiada a partir de un número menor de iteraciones.
@@ -211,9 +211,9 @@ Por último, la Figura \ref{fig:resultados_inicialización_sin_ruido} presenta l
 
 \pagebreak
 
-\subsection{Resultados de la clasificación de objetos}
+\subsection{Resultados de la clasificación de objetos.}
 
-Los resultados de los experimentos de clasificación se resumen a continuación. Las Figuras \ref{fig:results_mob}, \ref{fig:results_inc},  \ref{fig:results_xce} exhiben los resultados del desempeño de la clasificación de medidas cuadráticas codificadas en términos de las métricas de exactitud, precisión, exhaustividad y F1 utilizando las redes de clasificación MobilNetV2 en la Figura \ref{fig:results_mob}, InceptionV3 en la Figura \ref{fig:results_inc} y Xception en la Figura \ref{fig:results_xce}. Cada figura representa la comparación de los esquemas de clasificación tradicional, y los métodos propuestos BPM y LFSI. La clasificación se realizó sobre medidas simuladas en los campos de difracción cercano, medio y lejano. Es importante resaltar que, el método tradicional muestra un desempeño menor en todas las métricas comparando con los métodos propuestos BPM y LFSI para cada uno de los campos de difracción y redes de clasificación.
+Los resultados de los experimentos de clasificación se resumen a continuación. Las Figuras \ref{fig:results_mob}, \ref{fig:results_inc} y \ref{fig:results_xce} exhiben los resultados del desempeño de la clasificación de medidas cuadráticas codificadas en términos de las métricas de exactitud, precisión, exhaustividad y F1 utilizando las redes de clasificación MobilNetV2 en la Figura \ref{fig:results_mob}, InceptionV3 en la Figura \ref{fig:results_inc} y Xception en la Figura \ref{fig:results_xce}. Cada figura representa la comparación de los esquemas de clasificación tradicional, y los métodos propuestos BPM y LFSI. La clasificación se realizó sobre medidas simuladas en los campos de difracción cercano, medio y lejano. Es importante resaltar que, el método tradicional muestra un desempeño menor en todas las métricas comparando con los métodos propuestos BPM y LFSI para cada uno de los campos de difracción y redes de clasificación.
 
 Específicamente, el método propuesto supera al método tradicional en hasta 0.24, 0.2, 0.25 y 0.22 en términos de exactitud, precisión, exhaustividad y métrica F1, respectivamente. En particular, estas ganancias se reportan para la clasificación de objetos utilizando medidas simuladas del campo lejano a partir del conjunto de datos de Fashion-MNIST. En el caso del campo medio, se supera en 0.21, 0.13, 0.21, y 0.17 y para el campo cercano, se supera en 0.1, 0.14, 0.13, y 0.14 en exactitud, en precisión, en exhaustividad y en F1, respectivamente. 
 

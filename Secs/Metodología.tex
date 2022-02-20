@@ -8,12 +8,12 @@
 
 \chapter{METODOLOGÍA PROPUESTA}
 
-El enfoque de red neuronal profunda propuesto para la clasificación de objetos a partir de medidas cuadráticas codificadas incluye tres etapas principales: (i) capa de adquisición, (ii) enfoque de inicialización, (iii) y red de clasificación. La Figura \ref{fig:esquema_entrenamiento} ilustra el esquema de red neuronal profunda propuesto. Primero, una capa de adquisición simula el proceso de medición \eqref{eq:phase_retrieval_problem} a través del modelado de la propagación del campo óptico. Luego, un procedimiento de inicialización aproxima el campo óptico $\mathbf{z}$. Finalmente, la red de clasificación infiere la clase correspondiente a cada medida cuadrática codificada.
+El enfoque propuesto de red neuronal profunda para la clasificación de objetos, a partir de medidas cuadráticas codificadas, incluye tres etapas principales: (i) capa de adquisición, (ii) enfoque de inicialización, (iii) y red de clasificación. La Figura \ref{fig:esquema_entrenamiento} ilustra el esquema de red neuronal profunda propuesto. Primero, una capa de adquisición simula el proceso de medición \eqref{eq:phase_retrieval_problem}, a través del modelado de la propagación del campo óptico. Luego, un procedimiento de inicialización aproxima el campo óptico $\mathbf{z}$. Finalmente, la red de clasificación infiere la clase correspondiente a cada medida cuadrática codificada.
 
 
 \begin{figure}[!h]
     \centering
-    \caption{Esquema de red neuronal profunda de tres etapas propuesto para la clasificación de objetos a partir de medidas cuadráticas codificadas.}
+    \caption{Esquema propuesto de red neuronal profunda de tres etapas para la clasificación de objetos, a partir de medidas cuadráticas codificadas.}
     \includegraphics[width=\linewidth]{images/metodología/esquema_entrenamiento.pdf}
     \label{fig:esquema_entrenamiento}
 \end{figure}
@@ -38,7 +38,7 @@ donde $\mathbf{a}_{i,\psi}$ es la $i$-ésima columna de la matriz $\mathbf{A}=[\
 Tenga en cuenta que, la matriz $\mathbf{Y}_{0}$ se calcula en la línea 4 del Algoritmo \ref{alg_1}. En la línea 6, se aplica el filtrado mediante la operación de convolución $*$ entre $\mathbf{Y}_{0}\hat{\mathbf{z}}^{(t)}$ y en el kernel $\mathbf{G}$. Luego, la aproximación filtrada se normaliza en la línea 7. Finalmente, este algoritmo devuelve el vector complejo $\tilde{\mathbf{z}}$ en la línea 10, que se multiplica por el factor de escala $\lambda_0=\sqrt{\sum_{\ell=1}^{L}\frac{\Vert\mathbf{y}_{\ell,\psi}\Vert_{2}^2}{nL}}$ . %\textcolor{negro}{$\mathcal{O}(n\log n)$ }
   
 
-Este trabajó propone la inicialización aprendida realizando un desenvolvimiento del algoritmo FSI en un esquema de red neuronal, como se muestra en la Figura \ref{fig:esquema_entrenamiento}. Adicionalmente, se incluye el filtro $\mathbf{G}$ como un parámetro entrenable de la red neuronal bajo una regularización definida a través de la siguiente función indicadora
+Este trabajo propone la inicialización aprendida realizando un desenvolvimiento del algoritmo FSI en un esquema de red neuronal, como se muestra en la Figura \ref{fig:esquema_entrenamiento}. Adicionalmente, se incluye el filtro $\mathbf{G}$ como un parámetro entrenable de la red neuronal bajo una regularización definida a través de la siguiente función indicadora
 \begin{equation}
   \mathcal{I}_{\Omega}(\mathbf{G})=  \left\{\begin{matrix}
  0& \text{si } \mathbf{G}\in \Omega \\ 
@@ -70,7 +70,7 @@ donde $\Omega=\{\mathbf{G}\in\mathbb{C}^{g\times g}| |(\mathbf{G})_{p,q}|\leq 1\
 
 \section{ETAPA DE CLASIFICACIÓN}
 
-En este trabajo, se propone un esquema de clasificación de medidas cuadráticas codificadas. Para realizar la tarea de clasificación se puede usar diferentes modelos de clasificación, en este sentido, se utilizaron tres arquitecturas de clasificación del estado del arte: MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3}  y Xception \myfootcite{xception}. La Tabla \ref{tab:comp_class_models} resume una el número de parámetros, la cantidad de capas y la profundidad de las arquitecturas de redes neuronales empleadas.
+En este trabajo se propone un esquema de clasificación de medidas cuadráticas codificadas, que incluye una etapa de estimación inicial del campo óptico. De hecho, dentro del esquema de clasificación es posible emplear diferentes arquitecturas de clasificación previamente validadas en la literatura. Específicamente, se utilizaron tres arquitecturas de clasificación del estado del arte: MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3}  y Xception \myfootcite{xception}. La Tabla \ref{tab:comp_class_models} resume el número de parámetros, la cantidad de capas de las redes neuronales de clasificación empleadas.
 
 \begin{table}[!h]
 \centering
@@ -85,19 +85,19 @@ Xception    & 22,910,480           & 71              \\ \hline
 \label{tab:comp_class_models}
 \end{table}
 
-El entrenamiento de los pesos $\theta$ de la red de clasificación $f_\theta(\cdot)$, se realizó mediante el siguiente problema de optimización
+El entrenamiento de los pesos $\theta$ de la red de clasificación $f_\theta(\cdot)$ se realizó mediante el siguiente problema de optimización
 
 \begin{equation}
-    \mathbf{\theta}^* \in  \argmin_{\mathbf{\theta}} \frac{1}{K}\sum_{k = 1}^{K} \mathcal{L}\left( c^{(k)}, f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right)\right).
+    \mathbf{\theta}^* \in  \argmin_{\mathbf{\theta}} \frac{1}{K}\sum_{k = 1}^{\mathcal{K}} \mathcal{L}\left( c^{(k)}, f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right)\right).
     \label{eq:dl_optimization}
 \end{equation}
 
-Este problema minimiza la función pérdida usualmente conocida como entropía categórica cruzada $\mathcal{L}(\cdot, \cdot)$ entre las etiquetas del conjunto de datos $c^{(k)}$, y las clases predichas $\hat{c}^{(k)} = f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right))$, donde $K$ es el número total de ejemplos del conjunto de datos, $\mathbf{y}_{\ell, \psi}^{(k)}$ es la medida cuadrática codificada del $k$-ésimo ejemplo.
+Este problema minimiza la función de pérdida, usualmente conocida como entropía categórica cruzada $\mathcal{L}(\cdot, \cdot)$, entre las etiquetas del conjunto de datos $c^{(k)}$ y las clases predichas $\hat{c}^{(k)} = f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right))$, $\mathbf{y}_{\ell, \psi}^{(k)}$ es la medida cuadrática codificada del $k$-ésimo ejemplo y $\mathcal{K}$ es el número total de ejemplos del conjunto de datos.
 
 
 \section{ESQUEMA PROPUESTO DE CLASIFICACIÓN DE OBJETOS}
 
-El Algoritmo \ref{alg:algoritmo_2} resume el proceso de entrenamiento del esquema mostrado en la Figura \ref{fig:esquema_entrenamiento}. En primer lugar, en la línea 2, el filtro es inicializado usando una distribución uniforme $\mathcal{U}(\mathbf{0},\mathbf{1})$. Luego, el modelo de propagación descrito por \eqref{eq:phase_retrieval_problem} es simulado por la capa de adquisición en la línea 5. Posteriormente, en línea 6, se realiza el proceso de inicialización que aproxima el campo óptico inicial con base en las medidas cuadráticas codificadas obtenidas. En las líneas 7-9, el optimizador Adam $\mathcal{A}_{dam}(\cdot)$ se implementa para minimizar la función de pérdida \eqref{eq:dl_optimization} entre la clase etiquetada en el conjuto de datos ${\mathbf{c}}^{(k)}$ y la predicción $f_{\boldsymbol{\theta}}\left(\tilde{\mathbf{z}}^{(k)}\right)$. Esta función se minimiza sobre el filtro de la inicialización y los parámetros de la red neuronal de clasificación ponderados por $\beta_1$ y $\beta_2$, respectivamente. Finalmente, estos parámetros óptimos $\mathbf{G}$ y $\boldsymbol{\theta}$ se devuelven en la línea 12.
+El Algoritmo \ref{alg:algoritmo_2} resume el proceso de entrenamiento del esquema mostrado en la Figura \ref{fig:esquema_entrenamiento}. En primer lugar, en la línea 2 el filtro es inicializado usando una distribución uniforme $\mathcal{U}(\mathbf{0},\mathbf{1})$. Luego, el modelo de propagación descrito por \eqref{eq:phase_retrieval_problem} es simulado por la capa de adquisición en la línea 5. Posteriormente, en línea 6 se realiza el proceso de inicialización que aproxima el campo óptico inicial con base en las medidas cuadráticas codificadas obtenidas. En las líneas 7-9, el optimizador Adam $\mathcal{A}_{dam}(\cdot)$ se implementa para minimizar la función de pérdida \eqref{eq:dl_optimization} entre la clase etiquetada en el conjuto de datos ${\mathbf{c}}^{(k)}$ y la predicción $f_{\boldsymbol{\theta}}\left(\tilde{\mathbf{z}}^{(k)}\right)$. Esta función se minimiza sobre el filtro de la inicialización y los parámetros de la red neuronal de clasificación ponderados por $\beta_1$ y $\beta_2$, respectivamente. Finalmente, estos parámetros óptimos $\mathbf{G}$ y $\boldsymbol{\theta}$ se devuelven en la línea 12.
 
 
 \begin{algoritmo}[!h]

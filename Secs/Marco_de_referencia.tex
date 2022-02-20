@@ -1,9 +1,9 @@
 \chapter{ADQUISICIÓN DE LA INFORMACIÓN DE FASE}
 
-Los sistemas ópticos de adquisición tradicionales captan únicamente la información de la intensidad de la luz incidente sobre el sensor, perdiendo la información de fase, que resulta fundamental en aplicaciones, tales como, cristalografía de rayos-x \myfootcite{pinilla2018coded}, astronomía \myfootcite{fienup1987phase}, holografía \myfootcite{rivenson2018phase}, entre otras. Por lo tanto, la obtención de la información de fase requiere la implementación  de sistemas ópticos que logren codificar la fase del campo óptico, preservándola implícita en las medidas de intensidad adquiridas. 
+Los sistemas ópticos tradicionales de adquisición captan únicamente la información de la intensidad de la luz incidente sobre el sensor, perdiendo la información de fase que resulta fundamental en aplicaciones, tales como cristalografía de rayos-x \myfootcite{pinilla2018coded}, astronomía \myfootcite{fienup1987phase}, holografía \myfootcite{rivenson2018phase}, entre otras. Por lo tanto, la obtención de la información de fase requiere la implementación  de sistemas ópticos que logren codificar la fase del campo óptico, preservándola implícita en las medidas de intensidad adquiridas. 
     
 \section{SISTEMA ÓPTICO DE DIFRACCIÓN}
-En múltiples áreas de la ciencia e ingeniería se presenta la adquisición de medidas de cuadráticas de intensidad con base en sistemas ópticos de difracción \myfootcite{fienup1987phase,pinilla2018coded,rivenson2018phase}. La Figura \ref{fig:difraction_systems} muestra un esquema convencional de los sistemas ópticos de difracción a lo largo de diferentes campos de propagación. Específicamente, este sistema de adquisición está compuesto por un objeto $\mathbf{z}\in\mathbb{C}^{n}$ ubicado en el campo óptico, que es iluminado por una fuente de luz coherente, posteriormente, este campo óptico inicial se propaga una distancia $z$, produciendo medidas cuadráticas o patrones de difracción, que finalmente se adquieren en el sensor. Cabe señalar que, se pueden definir tres diferentes campos de difracción $\psi$ según la distancia de propagación $z$, comúnmente conocidos como campo cercano, medio y lejano.
+En múltiples áreas de la ciencia e ingeniería se presenta la adquisición de medidas cuadráticas de intensidad, con base en sistemas ópticos de difracción \myfootcite{fienup1987phase}$^,$\myfootcite{pinilla2018coded}$^,$\myfootcite{rivenson2018phase}. La Figura \ref{fig:difraction_systems} muestra un esquema convencional de los sistemas ópticos de difracción a lo largo de diferentes campos de propagación. Específicamente, este sistema de adquisición está compuesto por un objeto $\mathbf{z}\in\mathbb{C}^{n}$ ubicado en el campo óptico, que es iluminado por una fuente de luz coherente posteriormente, este campo óptico inicial se propaga una distancia $z$, produciendo medidas cuadráticas o patrones de difracción que, finalmente, se adquieren en el sensor. Cabe señalar que, se pueden definir tres diferentes campos de difracción $\psi$ según la distancia de propagación $z$, comúnmente conocidos como campo cercano, medio y lejano.
 
 \begin{figure}[!h]
     \centering
@@ -50,7 +50,7 @@ La recuperación del campo óptico inicial $\mathbf{z}$ usando medidas cuadráti
     \label{eq:phase_retrieval_problem}
 \end{equation}
 
-donde $\Vert \cdot\Vert_2$ es la norma euclidiana. Usualmente, se puede garantizar una recuperación que conserva un error de fase global \eqref{eq:phase_retrieval_problem} \myfootcite{eldar2014phase, gross2017improved, 9062527}, es decir que, $\hat{\mathbf{z}} = \hat{\mathbf{z}}e^{j\theta}$ con $\theta \in [0, 2\pi)$. En consecuencia, la distancia euclidiana entre la escena $\mathbf{z}$ y su estimación $\hat{\mathbf{z}}$ está dada por
+donde $\Vert \cdot\Vert_2$ es la norma euclidiana. Usualmente, se puede garantizar una recuperación que conserva un error de fase global \eqref{eq:phase_retrieval_problem} \myfootcite{eldar2014phase}$^,$\myfootcite{ gross2017improved}$^,$\myfootcite{ 9062527}, es decir que, $\hat{\mathbf{z}} = \hat{\mathbf{z}}e^{j\theta}$ con $\theta \in [0, 2\pi)$. En consecuencia, la distancia euclidiana entre la escena $\mathbf{z}$ y su estimación $\hat{\mathbf{z}}$ está dada por
 \begin{equation}
     \mathrm{dist}(\mathbf{z}, \hat{\mathbf{z}}) = \min_{\theta \in [0, 2\pi)}\Vert \mathbf{z}e^{-j\theta} - \tilde{\mathbf{z}}\Vert_2.
 \end{equation}
@@ -69,7 +69,7 @@ Adicionalmente, el problema inverso \eqref{eq:phase_retrieval_problem} se ha res
 
 % \pagebreak
 \section{MEDIDAS CUADRÁTICAS CODIFICADAS}
-Aquí, se describe el sistema de adquisición que capta medidas cuadráticas codificadas de un campo óptico a lo largo de cada campo de difracción. La Figura \ref{fig:coded_difraction_systems} ilustra el esquema de adquisición de medidas cuadráticas codificadas que incluye una máscara de codificación de fase $\mathbf{D}_\ell \in \mathbb{C}^{n\times n}$ para modular el campo óptico inicial. De hecho, al modificar la configuración espacial de la máscara de fase es posible adquirir múltiples proyecciones de la escena. De modo que, las proyecciones cuadráticas codificadas en cada campo de difracción para la $\ell$-ésima proyección está dada por 
+En esta subsección, se describe el sistema de adquisición que capta medidas cuadráticas codificadas de un campo óptico a lo largo de cada campo de difracción. La Figura \ref{fig:coded_difraction_systems} ilustra el esquema de adquisición de medidas cuadráticas codificadas que incluye una máscara de codificación de fase $\mathbf{D}_\ell \in \mathbb{C}^{n\times n}$ para modular el campo óptico inicial. De hecho, al modificar la configuración espacial de la máscara de fase es posible adquirir múltiples proyecciones de la escena. De modo que, las proyecciones cuadráticas codificadas en cada campo de difracción para la $\ell$-ésima proyección está dada por 
 \begin{equation}
     \mathbf{y}_{\ell, \psi} = \vert \mathbf{A}_{\ell, \psi}\mathbf{z} \vert, \ell=\{1,\dots,L\},
     \label{eq:phase_retrieval_problem}
@@ -94,16 +94,16 @@ Específicamente, la matriz del sistema de adquisición $\mathbf{A}_{\ell, \psi}
 \end{equation}
 En general, las entradas aleatorias de la matriz  $\mathbf{D}_{\ell} = \mathrm{diag}(\mathbf{d})$ son $i.i.d$ copias de una variable aleatoria $d \in \mathbb{C}$ con $\mathbf{d} \in \{d\}^{n}$, donde $\mathrm{diag}(\cdot)$ devuelve una matriz diagonal cuadrada de un vector dado. Aquí, $d$ representa una modulación pasiva en la fase, por lo tanto, se impone que $d$ no aumenta la energía de la escena durante el proceso de modulación. Así que, se establece la Definición \ref{def:admissible} para garantizar la admisibilidad de la variable aleatoria.
 
-\begin{definition}{(Variable aleatorias admisible). \myfootcite{9062527}} 
+\begin{definition}{(Variable aleatoria admisible). \myfootcite{9062527}} 
     Una variable aleatoria que cumple con $|d|\leq 1$, se considera admisible como elemento de modulación en fase.\label{def:admissible}
 \end{definition}
 
 
-Algunos ejemplos de variables aleatorias que satisfacen la Definición \ref{def:admissible} se listan en la Tabla \ref{tab:admi_examples}. Estas variables aleatorias como elementos de codificación han sido usados en \myfootcite{9062527} para resolver el problema de recuperación de fase.
+Algunos ejemplos de variables aleatorias que satisfacen la Definición \ref{def:admissible} se listan en la Tabla \ref{tab:admi_examples}. Estas variables aleatorias han sido usados en \myfootcite{9062527} como elementos de codificación para resolver el problema de recuperación de fase.
 
 \begin{table}[!h]
 \centering
-\caption{Ejemplos de codificaciones aleatórias admisibles según la Definición \ref{def:admissible}.}
+\caption{Ejemplos de codificaciones aleatorias admisibles según la Definición \ref{def:admissible}.}
 \begin{tabular}{|c|c|}
 \hline
 \textbf{Elemento de codificación} & \textbf{Probabilidad}                     \\ \hline
@@ -124,11 +124,11 @@ $d \in \{-1, 1, -j,  j\}$ & $\{ \frac{1}{4},  \frac{1}{4}, \frac{1}{4},  \frac{1
 % donde $\mathbb{E}[\cdot]$ corresponde al valor esperado. Aquí, se busca que $M=1$ para que la codificación no incremente la potencia de las medidas cuadráticas.
 
 \chapter{ALGORITMOS DE RECUPERACIÓN DE FASE}
-En esta sección, se presentan los algoritmos comúnmente utilizados para recuperar el campó óptico inicial a partir de medidas cuadráticas codificadas. La literatura ha planteado diferentes algoritmos basados en formulaciones convexas y no convexas.
+En esta sección, se presentan los algoritmos comúnmente utilizados para recuperar el campo óptico inicial a partir de medidas cuadráticas codificadas. La literatura ha planteado diferentes algoritmos basados en formulaciones convexas y no convexas como se expone a continuación.
 
 \section{FORMULACIONES CONVEXAS}
 
-Este tipo de algoritmos relajan el problema recuperación de fase a un problema convexo equivalente.
+Este tipo de algoritmos relajan el problema de recuperación de fase a un problema convexo equivalente.
 
 \begin{itemize}
     \item \textbf{PhaseLift \myfootcite{candes2013phaselift}}:
@@ -152,14 +152,14 @@ Este tipo de algoritmos relajan el problema recuperación de fase a un problema 
             \subjectto \quad & \vert \langle \mathbf{a}_i,\mathbf{z} \rangle \vert \leq (\boldsymbol{\phi})_i,
         \end{aligned}
     \end{equation}
-    donde $\langle \cdot, \cdot \rangle_{\mathbb{R}}$ denota la parte real del producto interno y $(\boldsymbol{\phi})_i = \sqrt{(\mathbf{y})_i}$
+    donde $\langle \cdot, \cdot \rangle_{\mathbb{R}}$ denota la parte real del producto interno y $(\boldsymbol{\phi})_i = \sqrt{(\mathbf{y})_i}$.
     
 \end{itemize}
 
 \section{FORMULACIONES NO CONVEXAS}
 Las formulaciones no convexas requieren una estimación inicial de la escena o inicialización, además, calculan el gradiente siguiendo la diferenciación de Wirtinger.
 \begin{itemize}
-    \item \textbf{TRUNCATED WIRTINGER FLOW (TWF) \myfootcite{chen2017solving}:} este algoritmo se basa en el modelo de muestreo según un variables aleatorias que siguen una distribución de Poisson de la forma
+    \item \textbf{TRUNCATED WIRTINGER FLOW (TWF) \myfootcite{chen2017solving}:} este algoritmo se basa en el modelo de muestreo según unas variables aleatorias que siguen una distribución de Poisson, de la forma
     
     \begin{equation}
         (\mathbf{y})_i\sim \mathrm{Poisson}( \vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert^2 ), \quad i=1,\dots,m.
@@ -196,11 +196,11 @@ Las formulaciones no convexas requieren una estimación inicial de la escena o i
 
 \chapter{SISTEMAS DE CLASIFICACIÓN}
 
-La clasificación ha sido una de las tareas computacionales más abordadas en el estado del arte. Específicamente, dentro de los algoritmos de clasificación tradicionales se encuentran las máquinas de soporte vectorial, K vecinos más cercanos \myfootcite{kim12012comparing} y los enfoques basados en redes neuronales \myfootcite{li2019deep,li2018deep, wang2019development}.
+La clasificación ha sido una de las tareas computacionales más abordadas en el estado del arte. Específicamente, dentro de los algoritmos de clasificación tradicionales se encuentran las máquinas de soporte vectorial, K vecinos más cercanos \myfootcite{kim12012comparing} y los enfoques basados en redes neuronales \myfootcite{li2019deep}$^,$\myfootcite{li2018deep}$^,$\myfootcite{ wang2019development}, los cuales se describen a continuación.
 \section{MÁQUINAS DE SOPORTE VECTORIAL}
-Las máquinas de soporte vectorial (SVM, por su sigla en inglés) \myfootcite{suthaharan2016support} permiten la clasificación binaria, donde cada punto $n$-dimensional $\mathbf{x}_i$ tiene asociada una etiqueta de clase $c_i \in \{1,-1\}$.
+Las máquinas de soporte vectorial (SVM, de su sigla en inglés, \textit{support vector machine}) \myfootcite{suthaharan2016support} permiten la clasificación binaria, donde cada punto $n$-dimensional $\mathbf{x}_i$ tiene asociada una etiqueta de clase $c_i \in \{1,-1\}$.
 
-Suponiendo que los datos de ambas clases son separables linealmente, este método propone separar los datos usando el hiperplano $\mathbf{w}\mathbf{x}_i + b = 0$. En la Figura \ref{fig:svm}, se muestra una representación de una SVM en $\mathbb{R}^2$
+Suponiendo que los datos de ambas clases son separables linealmente, este método propone separar los datos usando el hiperplano $\mathbf{w}\mathbf{x}_i + b = 0$. En la Figura \ref{fig:svm} se muestra una representación de una SVM en $\mathbb{R}^2$
 
 \begin{equation}
     \begin{split}
@@ -212,12 +212,12 @@ Suponiendo que los datos de ambas clases son separables linealmente, este métod
 Cabe resaltar que, para todos los elementos del conjunto de datos se cumple que
 
 \begin{equation}
-    c_i(\mathbf{w}\mathbf{x}_i + b) \geq 1, \quad i=1,\dots, m
+    c_i(\mathbf{w}\mathbf{x}_i + b) \geq 1, \quad i=1,\dots, m.
 \end{equation}
 
 \begin{figure}[H]
     \centering
-    \caption{\hspace{2mm}Representación de una SVM en $\mathbb{R}^2$. La recta $\mathbf{wx} -b = 0$ en rojo representa el plano óptimo que soluciona el problema de optimización \eqref{eq:problema_optimización_svm}.}
+    \caption{\hspace{2mm}Representación de una SVM en $\mathbb{R}^2$. La recta $\mathbf{wx} -b = 0$ en rojo representa el plano óptimo que soluciona el problema de optimización \eqref{eq:problema_optimización_svm}. Las rectas $\mathbf{wx} -b = 1$ y $\mathbf{wx} -b = -1$ representan los extremos de separación de las clases de puntos en rojo y en azul.}
     \includegraphics[width=0.4\linewidth]{images/marco_teórico/svm.pdf}
     \label{fig:svm}
 \end{figure}
@@ -232,7 +232,7 @@ El problema de optimización se plantea de la siguiente forma
     \label{eq:problema_optimización_svm}
 \end{equation}
 
-Usualmente, no es posible separar los datos linealmente, por esta razón, se puede incluir una función no lineal $ \phi$ que transforme los datos a un conjunto de características donde las clases sean separables linealmente. El problema de optimización para una SVM usando un kernel $\phi$ se formula como
+Usualmente, no es posible separar los datos de forma lineal, por esta razón, se puede incluir una función no lineal $ \phi$ que transforme los datos a un conjunto de características donde las clases sean separables linealmente. El problema de optimización para una SVM usando un kernel $\phi$ se formula como
 
 \begin{equation}
     \begin{aligned}
@@ -244,7 +244,7 @@ Usualmente, no es posible separar los datos linealmente, por esta razón, se pue
 
 \section{K VECINOS MÁS CERCANOS}
 
-K vecinos más cercanos (KNN, por sus siglas en inglés) propone que un conjunto $D = \{(\mathbf{x}_i, {c}_i)\}_1^n$, siendo $\mathbf{x}_i$ el vector de características e $\mathbf{c}_i$ la clase correspondiente. Para un nuevo vector a clasificar $\mathbf{\hat{x}}$, el algoritmo KNN encuentra los $K$ puntos más cercanos del dataset. La Figura \ref{fig:knn} muestra una representación de la clasificación de dos nuevas muestras en $\mathbb{R}^2$ con $K = 5$. Tradicionalmente, se emplea la distancia euclidiana 
+K vecinos más cercanos (KNN, por sus siglas en inglés, \textit{k-nearest neighbors.}) propone que un conjunto $D = \{(\mathbf{x}_i, {c}_i)\}_1^n$, siendo $\mathbf{x}_i$ el vector de características y $\mathbf{c}_i$ la clase correspondiente. Para un nuevo vector a clasificar $\mathbf{\hat{x}}$, el algoritmo KNN encuentra los $K$ puntos más cercanos del conjunto de datos. La Figura \ref{fig:knn} muestra una representación de la clasificación de dos nuevas muestras en $\mathbb{R}^2$ con $K = 5$. Tradicionalmente, se emplea la distancia euclidiana 
 
 \begin{equation}
     d(\mathbf{x}_p,\mathbf{x}_q) = \Vert \mathbf{x}_p-\mathbf{x}_q \Vert_2
@@ -274,8 +274,8 @@ donde $\delta(\cdot,\cdot)$ corresponde a la función delta de Kronecker, dada p
 \end{equation}
 \section{REDES NEURONALES}
 
-Los enfoques de aprendizaje profundo han generado un gran progreso en problemas muy complejos en los últimos años
-\myfootcite{he2016deep,li2019deep,li2018deep, wang2019development,vaswani2017attention}. El aprendizaje profundo busca encontrar una función $f: \mathbb{R}^{d_1} \rightarrow \mathbb{R}^{d_2}$ que relacione un dato de entrada con una respectiva salida. La función $f$ comúnmente se denomina arquitectura de red neuronal profunda, puesto que, consiste en la concatenación de múltiples capas compuestas por unidades mínimas llamadas neuronas. Cada neurona realiza una combinación lineal entre las entradas, posteriormente, se emplea una función no lineal en la salida. Las salidas de cada neurona en una capa funcionan como entrada de las neuronas ubicadas en la siguiente capa, por lo tanto, se construye una arquitectura de red neuronal profunda \myfootcite{fan2019selective}. En la Figura \ref{fig:nn}, se muestra una arquitectura de una arquitectura de red neuronal $f: \mathbb{R}^{d_1} \rightarrow \mathbb{R}^{d_2}$.
+Los enfoques de aprendizaje profundo han generado un gran progreso en el desarrollo de problemas muy complejos en los últimos años
+\myfootcite{he2016deep}$^,$\myfootcite{li2019deep}$^,$\myfootcite{li2018deep}$^,$\myfootcite{wang2019development}$^,$\myfootcite{vaswani2017attention}. El aprendizaje profundo busca encontrar una función $f: \mathbb{R}^{d_1} \rightarrow \mathbb{R}^{d_2}$ que relacione un dato de entrada con una respectiva salida. La función $f$ comúnmente se denomina arquitectura de red neuronal profunda, puesto que, consiste en la concatenación de múltiples capas compuestas por unidades mínimas llamadas neuronas. Cada neurona realiza una combinación lineal entre las entradas, posteriormente, se emplea una función no lineal en la salida. Las salidas de cada neurona en una capa funcionan como entrada de las neuronas ubicadas en la siguiente capa, por lo tanto, se construye una arquitectura de red neuronal profunda \myfootcite{fan2019selective}. En la Figura \ref{fig:nn}, se muestra una arquitectura de red neuronal $f: \mathbb{R}^{d_1} \rightarrow \mathbb{R}^{d_2}$.
 
 \begin{figure}[H]
     \centering
@@ -294,27 +294,27 @@ Por otra parte, el modelo matemático de una red neuronal estándar se puede def
 donde $1 \leq j \leq J$ representa cada una de las capas que compone la red neuronal, $\sigma_j$ corresponde a una función no lineal en dicha capa, $\mathbf{W}_j$ es la matriz de pesos y $\mathbf{b}_j$ es el bias de la capa. Con el fin de entrenar los pesos $\theta$ bajo un enfoque de aprendizaje supervisado, se requiere de un conjunto de entrenamiento $\{(\mathbf{x}_k, c_k) \}_{k=1}^{N}$ y una función de costo $\mathcal{L}( c_k,  f_\theta(\mathbf{x}_k))$ para plantear el problema de optimización 
 
 \begin{equation}
-    \minimize_\theta \frac{1}{N}\sum_{k=1}^{N} \mathcal{L}( {c}_k,  f_\theta(\mathbf{x}_k))
+    \minimize_\theta \frac{1}{N}\sum_{k=1}^{N} \mathcal{L}( {c}_k,  f_\theta(\mathbf{x}_k)).
     \label{eq:optimización_nn}
 \end{equation}
 \section{CLASIFICACIÓN DE IMÁGENES USANDO REDES NEURONALES ÓPTICAS}
 
 
-Recientemente, se han publicado avances en el campo de redes neuronales implementadas físicamente haciendo uso de propiedades ópticas. En este tipo de redes, se destaca la velocidad de la inferencia, puesto que, esta se realiza de manera óptica, es decir, la velocidad de cálculo está limitada por la velocidad de la luz en el medio y no requiere de una fuente de energía activa para realizar los cálculos. Específicamente, \myfootcite{lin2018all} implementa las capas de una red neuronal haciendo uso de materiales difractivos, realizando la modulación de la luz en fase y aprovechando la propagación del campo óptico para realizar tareas de clasificación.
+Recientemente, se han publicado avances en el campo de redes neuronales implementadas físicamente haciendo uso de propiedades ópticas. En este tipo de redes se destaca la velocidad de la inferencia, debido a que, esta se realiza de manera óptica, es decir, la velocidad de cálculo está limitada por la velocidad de la luz en el medio y no requiere de una fuente de energía activa para realizar los cálculos. Específicamente, en \myfootcite{lin2018all} Xing et al, implementa las capas de una red neuronal haciendo uso de materiales difractivos, realizando la modulación de la luz en fase y aprovechando la propagación del campo óptico para realizar tareas de clasificación.
 
 
 \begin{figure}[!h]
     \centering
-    \caption{Implementación de redes neuronales ópticas implementadas ópticamente mediante elementos ópticos difractivos.}
+    \caption{Implementación de redes neuronales ópticas implementadas físicamente mediante elementos difractivos.}
     \includegraphics[width = 1\linewidth]{images/marco_teórico/diffractive_networks.png}
-    \caption*{Modificado de: \textit{All-optical machine learning using diffractive deep neural networks, 2018.}}
+    \caption*{Fuente: Modificado de \textit{All-optical machine learning using diffractive deep neural networks, 2018.}}
     \label{fig:optical_networks}
 \end{figure}
 
 \section{CLASIFICACIÓN USANDO MEDIDAS CUADRÁTICAS}
-En el campo de tomografía computarizada \myfootcite{douarre2020value} e imágenes de un solo píxel \myfootcite{bacca2020coupled}, se han propuesto sistemas de clasificación que usan únicamente medidas obtenidas a través de sistemas lineales de adquisición, esto debido al enfoque basado en el aprendizaje profundo en el que la arquitectura incluye una capa con el sistema óptico de adquisición. Asimismo, este enfoque ha sido estudiado en holografía \myfootcite{kim2018deep} y cristalografía de rayos-x \myfootcite{ziletti2018insightful}, donde las medidas obtenidas son difícilmente reconocidas por el ojo humano. 
+En el campo de tomografía computarizada \myfootcite{douarre2020value} e imágenes de un solo píxel \myfootcite{bacca2020coupled}, se han propuesto sistemas de clasificación que usan únicamente medidas obtenidas a través de sistemas lineales de adquisición, debido al enfoque basado en el aprendizaje profundo en el que la arquitectura incluye una capa con el sistema óptico de adquisición. Asimismo, este enfoque ha sido estudiado en holografía \myfootcite{kim2018deep} y cristalografía de rayos-x \myfootcite{ziletti2018insightful}, donde las medidas obtenidas son difícilmente reconocidas por el ojo humano. 
 
-Sin embargo, estos enfoques de clasificación tradicionales no han sido abordados en imágenes de medidas cuadráticas codificadas, por lo tanto, este trabajo propone el desarrollo de un algoritmo de clasificación de objetos usando medidas cuadráticas codificadas bajo un enfoque de aprendizaje profundo. 
+Sin embargo, enfoques tradicionales de clasificación no han sido abordados en imágenes de medidas cuadráticas codificadas. Por lo tanto, este trabajo propone el desarrollo de un algoritmo de clasificación de objetos usando medidas cuadráticas codificadas bajo un enfoque de aprendizaje profundo. 
 
 
 
