@@ -46,7 +46,7 @@ Aquí, $k_0=2\pi/\lambda$ representa el número de onda, $[p,q]$ y $[r,s]$ son l
 La recuperación del campo óptico inicial $\mathbf{z}$ usando medidas cuadráticas es un problema inverso comúnmente denominado recuperación de fase. En general, el problema de recuperación de fase basado en \eqref{eq:diffraction_base} se puede definir como 
 
 \begin{equation}
-    \minimize_{\mathbf{z}\in\mathbb{C}^n}\Vert\mathbf{y}_{\psi} - \vert \mathbf{A}_{\psi}\mathbf{z} \vert\Vert_2^2, 
+    \minimize_{\mathbf{z}\in\mathbb{C}^n}\Vert\mathbf{y}_{\psi} - \vert \mathbf{A}_{\psi}\mathbf{z} \vert^2\Vert_2^2, 
     \label{eq:phase_retrieval_problem}
 \end{equation}
 
@@ -71,7 +71,7 @@ Adicionalmente, el problema inverso \eqref{eq:phase_retrieval_problem} se ha res
 \section{MEDIDAS CUADRÁTICAS CODIFICADAS}
 En esta subsección, se describe el sistema de adquisición que capta medidas cuadráticas codificadas de un campo óptico a lo largo de cada campo de difracción. La Figura \ref{fig:coded_difraction_systems} ilustra el esquema de adquisición de medidas cuadráticas codificadas que incluye una máscara de codificación de fase $\mathbf{D}_\ell \in \mathbb{C}^{n\times n}$ para modular el campo óptico inicial. De hecho, al modificar la configuración espacial de la máscara de fase es posible adquirir múltiples proyecciones de la escena. De modo que, las proyecciones cuadráticas codificadas en cada campo de difracción para la $\ell$-ésima proyección está dada por 
 \begin{equation}
-    \mathbf{y}_{\ell, \psi} = \vert \mathbf{A}_{\ell, \psi}\mathbf{z} \vert, \ell=\{1,\dots,L\},
+    \mathbf{y}_{\ell, \psi} = \vert \mathbf{A}_{\ell, \psi}\mathbf{z} \vert^2, \ell=\{1,\dots,L\},
     \label{eq:phase_retrieval_problem}
 \end{equation}
 

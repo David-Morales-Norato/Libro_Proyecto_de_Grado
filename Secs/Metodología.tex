@@ -88,7 +88,7 @@ Xception    & 22,910,480           & 71              \\ \hline
 El entrenamiento de los pesos $\theta$ de la red de clasificación $f_\theta(\cdot)$ se realizó mediante el siguiente problema de optimización
 
 \begin{equation}
-    \mathbf{\theta}^* \in  \argmin_{\mathbf{\theta}} \frac{1}{K}\sum_{k = 1}^{\mathcal{K}} \mathcal{L}\left( c^{(k)}, f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right)\right).
+    \mathbf{\theta}^* \in  \argmin_{\mathbf{\theta}} \frac{1}{\mathcal{K}}\sum_{k = 1}^{\mathcal{K}} \mathcal{L}\left( c^{(k)}, f_\theta(\mathrm{LFSI}\left(\mathbf{A}_{\ell,\psi},\mathbf{y}_{\ell, \psi}\right)\right).
     \label{eq:dl_optimization}
 \end{equation}
 
