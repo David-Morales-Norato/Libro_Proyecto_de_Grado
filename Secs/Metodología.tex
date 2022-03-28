@@ -41,9 +41,9 @@ Tenga en cuenta que, la matriz $\mathbf{Y}_{0}$ se calcula en la línea 4 del Al
 Este trabajo propone la inicialización aprendida realizando un desenvolvimiento del algoritmo FSI en un esquema de red neuronal, como se muestra en la Figura \ref{fig:esquema_entrenamiento}. Adicionalmente, se incluye el filtro $\mathbf{G}$ como un parámetro entrenable de la red neuronal bajo una regularización definida a través de la siguiente función indicadora
 \begin{equation}
   \mathcal{I}_{\Omega}(\mathbf{G})=  \left\{\begin{matrix}
- 0& \text{si } \mathbf{G}\in \Omega \\ 
-+\infty & \text{si } \mathbf{G}\notin \Omega 
-\end{matrix}\right., \label{eq:regularizationG}
+ 0& \text{si } \mathbf{G}\in \Omega, \\ 
++\infty & \text{si } \mathbf{G}\notin \Omega ,
+\end{matrix}\right \label{eq:regularizationG}
 \end{equation}
 donde $\Omega=\{\mathbf{G}\in\mathbb{C}^{g\times g}| |(\mathbf{G})_{p,q}|\leq 1\}$. 
 
@@ -70,7 +70,7 @@ donde $\Omega=\{\mathbf{G}\in\mathbb{C}^{g\times g}| |(\mathbf{G})_{p,q}|\leq 1\
 
 \section{ETAPA DE CLASIFICACIÓN}
 
-En este trabajo se propone un esquema de clasificación de medidas cuadráticas codificadas, que incluye una etapa de estimación inicial del campo óptico. De hecho, dentro del esquema de clasificación es posible emplear diferentes arquitecturas de clasificación previamente validadas en la literatura. Específicamente, se utilizaron tres arquitecturas de clasificación del estado del arte: MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3}  y Xception \myfootcite{xception}. La Tabla \ref{tab:comp_class_models} resume el número de parámetros, la cantidad de capas de las redes neuronales de clasificación empleadas.
+En este trabajo se propone un esquema de clasificación de medidas cuadráticas codificadas, que incluye una etapa de estimación inicial del campo óptico. De hecho, dentro del esquema de clasificación es posible emplear diferentes arquitecturas de clasificación previamente validadas en la literatura. Específicamente, se utilizaron tres arquitecturas de clasificación del estado del arte: MobilNetV2 \myfootcite{mobilnetv2}, InceptionV3 \myfootcite{inceptionv3}  y Xception \myfootcite{xception}. El Cuadro \ref{tab:comp_class_models} resume el número de parámetros, la cantidad de capas de las redes neuronales de clasificación empleadas.
 
 \begin{table}[!h]
 \centering

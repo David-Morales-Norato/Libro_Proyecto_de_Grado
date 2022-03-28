@@ -23,10 +23,10 @@ donde $\vert \cdot \vert$ denota la magnitud, y $\mathbf{A}_\psi\in\mathbb{C}^{n
 
 \begin{equation}
     \mathbf{A}_\psi = \left\{\begin{matrix}
- \mathbf{F}\mathbf{T}\mathbf{F}^\mathcal{H}    & \text{si } \psi=1\rightarrow \text{Campo cercano}\\ 
- \mathbf{F}^\mathcal{H}\mathbf{Q} &\text{si } \psi=2\rightarrow\text{ Campo medio} \\ 
- \mathbf{F}  &\text{si } \psi=3\rightarrow\text{Campo lejano}
-\end{matrix}\right., \label{eq:matrix_a_no_coded}
+ \mathbf{F}\mathbf{T}\mathbf{F}^\mathcal{H}    & \text{si } \psi=1\rightarrow \text{Campo cercano},\\ 
+ \mathbf{F}^\mathcal{H}\mathbf{Q} &\text{si } \psi=2\rightarrow\text{ Campo medio}, \\ 
+ \mathbf{F}  &\text{si } \psi=3\rightarrow\text{Campo lejano},
+\end{matrix}\right. \label{eq:matrix_a_no_coded}
 \end{equation}
 
 donde $\mathbf{F}\in\mathbb{C}^{n\times n}$ corresponde a la transformada discreta de Fourier, $\mathbf{Q}\in\mathbb{C}^{n\times n}$ y $\mathbf{T}\in\mathbb{C}^{n\times n}$ representan matrices que describen las funciones de transferencia usadas en óptica de Fourier \myfootcite{poon2014introduction} para modelar la difracción en el campo cercano y medio, respectivamente, dadas por
@@ -87,10 +87,10 @@ Específicamente, la matriz del sistema de adquisición $\mathbf{A}_{\ell, \psi}
 
 \begin{equation}
     \mathbf{A}_{\ell,\psi}= \left\{\begin{matrix}
-\mathbf{F}\mathbf{T}\mathbf{F}^\mathcal{H} \mathbf{D}_\ell  & \text{si } \psi=1\rightarrow \text{Campo cercano}\\ 
-\mathbf{F}^\mathcal{H}\mathbf{Q}\mathbf{D}_\ell &\text{si } \psi=2\rightarrow\text{ Campo medio} \\ 
-\mathbf{F}\mathbf{D}_\ell  &\text{si } \psi=3\rightarrow\text{Campo lejano}
-\end{matrix}\right.. \label{eq:matrix_a}
+\mathbf{F}\mathbf{T}\mathbf{F}^\mathcal{H} \mathbf{D}_\ell  & \text{si } \psi=1\rightarrow \text{Campo cercano},\\ 
+\mathbf{F}^\mathcal{H}\mathbf{Q}\mathbf{D}_\ell &\text{si } \psi=2\rightarrow\text{ Campo medio}, \\ 
+\mathbf{F}\mathbf{D}_\ell  &\text{si } \psi=3\rightarrow\text{Campo lejano}.
+\end{matrix}\right \label{eq:matrix_a}
 \end{equation}
 En general, las entradas aleatorias de la matriz  $\mathbf{D}_{\ell} = \mathrm{diag}(\mathbf{d})$ son $i.i.d$ copias de una variable aleatoria $d \in \mathbb{C}$ con $\mathbf{d} \in \{d\}^{n}$, donde $\mathrm{diag}(\cdot)$ devuelve una matriz diagonal cuadrada de un vector dado. Aquí, $d$ representa una modulación pasiva en la fase, por lo tanto, se impone que $d$ no aumenta la energía de la escena durante el proceso de modulación. Así que, se establece la Definición \ref{def:admissible} para garantizar la admisibilidad de la variable aleatoria.
 
@@ -99,7 +99,7 @@ En general, las entradas aleatorias de la matriz  $\mathbf{D}_{\ell} = \mathrm{d
 \end{definition}
 
 
-Algunos ejemplos de variables aleatorias que satisfacen la Definición \ref{def:admissible} se listan en la Tabla \ref{tab:admi_examples}. Estas variables aleatorias han sido usados en \myfootcite{9062527} como elementos de codificación para resolver el problema de recuperación de fase.
+Algunos ejemplos de variables aleatorias que satisfacen la Definición \ref{def:admissible} se listan en el Cuadro \ref{tab:admi_examples}. Estas variables aleatorias han sido usados en \myfootcite{9062527} como elementos de codificación para resolver el problema de recuperación de fase.
 
 \begin{table}[!h]
 \centering
@@ -176,7 +176,7 @@ Las formulaciones no convexas requieren una estimación inicial de la escena o i
     \item \textbf{TRUNCATED AMPLITUDE FLOW (TAF) \myfootcite{wang2017solving}:} este algoritmo adopta un criterio de mínimos cuadrados para recuperar $\mathbf{z}$ basado en las medidas sin fase $\mathbf{y}$ 
     
     \begin{equation}
-        \minimize_{\mathbf{z} \in \mathbb{C}^{n}} \frac{1}{2m} \sum_{i=1}^{m} (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert - (\boldsymbol{\phi})_i)^2,
+        \minimize_{\mathbf{z} \in \mathbb{C}^{n}} \frac{1}{2m} \sum_{i=1}^{m} (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert - (\boldsymbol{\phi})_i)^2.
     \end{equation}
     
     Este algoritmo asume que las medidas $\mathbf{y}_i$ provienen de un sistema gaussiano de la forma $\mathbf{y}_i \sim \mathcal{N}(\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert^2, 1)$
@@ -187,7 +187,7 @@ Las formulaciones no convexas requieren una estimación inicial de la escena o i
         \minimize_{z \in \mathbb{C}^{n}} -\sum_{i=1}^{m} \ell(\mathbf{z};(\boldsymbol{\phi})_i/(\mathbf{y})_i),
     \end{equation}
     
-    donde en el caso de un muestreo con ruido gaussiano basado en la amplitud $\ell(\mathbf{z};\mathbf{y}_i) = (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert - (\boldsymbol{\phi})_i)^2$ o basado en la intensidad  $\ell(\mathbf{z};(\mathbf{y})_i) = (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert^2 - (\mathbf{y})_i)^2$. Por otra parte, basado en un muestreo con distribución de Poisson, $\ell(\mathbf{z};(\mathbf{y})_i) = {(\mathbf{y})_i \log(|\mathbf{a}_i^H \mathbf{z}|^2) -|\mathbf{a}_i^H \mathbf{z}|^2 }$ 
+    donde $\ell( \cdot )$ se puede definir a través de un muestreo con ruido gaussiano donde basado en la amplitud $\ell(\mathbf{z};\mathbf{y}_i) = (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert - (\boldsymbol{\phi})_i)^2$ o basado en la intensidad  $\ell(\mathbf{z};(\mathbf{y})_i) = (\vert \langle \mathbf{a}_i,\mathbf{z}\rangle \vert^2 - (\mathbf{y})_i)^2$. por último parte, basado en un muestreo con distribución de Poisson, $\ell(\mathbf{z};(\mathbf{y})_i) = {(\mathbf{y})_i \log(|\mathbf{a}_i^H \mathbf{z}|^2) -|\mathbf{a}_i^H \mathbf{z}|^2 }$ 
 \end{itemize}
 
 
@@ -200,13 +200,13 @@ La clasificación ha sido una de las tareas computacionales más abordadas en el
 \section{MÁQUINAS DE SOPORTE VECTORIAL}
 Las máquinas de soporte vectorial (SVM, de su sigla en inglés, \textit{support vector machine}) \myfootcite{suthaharan2016support} permiten la clasificación binaria, donde cada punto $n$-dimensional $\mathbf{x}_i$ tiene asociada una etiqueta de clase $c_i \in \{1,-1\}$.
 
-Suponiendo que los datos de ambas clases son separables linealmente, este método propone separar los datos usando el hiperplano $\mathbf{w}\mathbf{x}_i + b = 0$. En la Figura \ref{fig:svm} se muestra una representación de una SVM en $\mathbb{R}^2$
+Suponiendo que los datos de ambas clases son separables linealmente, este método propone separar los datos usando los hiperplanos descritos en  \eqref{eq:svm_eq_no_igual}. En la Figura \ref{fig:svm} se muestra una representación de una SVM en $\mathbb{R}^2$
 
 \begin{equation}
     \begin{split}
         \mathbf{w}\mathbf{x}_i + b &\geq 1 \quad si \quad c_i=1, \\
         \mathbf{w}\mathbf{x}_i + b &\leq 1 \quad si \quad c_i=-1.
-    \end{split}
+    \end{split}\label{eq:svm_eq_no_igual}
 \end{equation}
 
 Cabe resaltar que, para todos los elementos del conjunto de datos se cumple que
@@ -247,7 +247,7 @@ Usualmente, no es posible separar los datos de forma lineal, por esta razón, se
 K vecinos más cercanos (KNN, por sus siglas en inglés, \textit{k-nearest neighbors.}) propone que un conjunto $D = \{(\mathbf{x}_i, {c}_i)\}_1^n$, siendo $\mathbf{x}_i$ el vector de características y $\mathbf{c}_i$ la clase correspondiente. Para un nuevo vector a clasificar $\mathbf{\hat{x}}$, el algoritmo KNN encuentra los $K$ puntos más cercanos del conjunto de datos. La Figura \ref{fig:knn} muestra una representación de la clasificación de dos nuevas muestras en $\mathbb{R}^2$ con $K = 5$. Tradicionalmente, se emplea la distancia euclidiana 
 
 \begin{equation}
-    d(\mathbf{x}_p,\mathbf{x}_q) = \Vert \mathbf{x}_p-\mathbf{x}_q \Vert_2
+    d(\mathbf{x}_p,\mathbf{x}_q) = \Vert \mathbf{x}_p-\mathbf{x}_q \Vert_2.
     \label{eq:distancia_euclidiana}
 \end{equation}
 
@@ -268,8 +268,8 @@ donde $\delta(\cdot,\cdot)$ corresponde a la función delta de Kronecker, dada p
 
 \begin{equation}
     \delta(a,b) = \begin{cases}
-        1, \quad a = b \\
-        0, \quad a \neq b
+        1, \quad a = b, \\
+        0, \quad a \neq b,
     \end{cases}
 \end{equation}
 \section{REDES NEURONALES}
