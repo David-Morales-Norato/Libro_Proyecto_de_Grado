@@ -1,4 +1,4 @@
-Libro de Proyecto de Grado, 
+Libro de Proyecto de Grado, formato ICONTEC
 
 David Santiago Morales Norato, 2022
 Ingeniería de Sistemas.
